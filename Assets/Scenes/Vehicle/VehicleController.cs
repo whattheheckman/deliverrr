@@ -5,16 +5,20 @@ using UnityEngine.InputSystem;
 
 public class VehicleController : MonoBehaviour
 {
-    [Header("VehicleSettings")]
+    [Header("Acceleration")]
     [SerializeField] private float forwardSpeed = 10f;
     [SerializeField] private AnimationCurve accelerationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     [SerializeField] private float accelerationDuration = 3f;
 
 
     [Header("Steering")]
-    [SerializeField] private float steerSpeed = 0.5f;
     [SerializeField] private GameObject leftFrontWheel;
     [SerializeField] private GameObject rightFrontWheel;
+    [SerializeField] private AnimationCurve steeringCurve = AnimationCurve.EaseOut(0,0, 1, 1);
+    [SerializeField] private float maximumSteerAmountInDegrees = 35f; 
+    [SerializeField] private float steerSpeed = 0.5f;
+
+
 
 
     [Header("Braking")]
@@ -24,22 +28,37 @@ public class VehicleController : MonoBehaviour
 
 
     private float currentSpeedInterpolation = 0f;
-    private float targetSpeedDirection = 0f;
     private bool isBraking = false;
+
+    private float curveValue;
+    private float brakingProgress = 0f;
+    private float interpolatedSpeed = 0f;
+    private float moveAmount = 0f;
+
+    private float lastSteerAmount = 0f;
+    private float steerAmount = 0f;
+
+
+    //control variables
+    private float move = 0f;
+    private float steer = 0f;
+    private bool brakePressed = false;
 
     // Update is called once per frame
     void Update()
     {
-        float move = 0f;
-        float steer = 0f;
-        bool brakePressed = false;
+        // Reset current inputs at beginning of every frame
+        move = 0f;
+        steer = 0f;
+        brakePressed = false;
 
-        // Get movement input (forward only)
+        //decide to move forward or not
         if (Keyboard.current.wKey.isPressed)
         {
             move = 1f;
         }
-        // Get steering input (independent of movement keys)
+
+        // check for steering
         if (Keyboard.current.aKey.isPressed)
         {
             steer = 1f;
@@ -56,20 +75,17 @@ public class VehicleController : MonoBehaviour
         }
 
         // Interpolate speed using the acceleration or braking curve
-        targetSpeedDirection = move;
-        float targetInterpolation = Mathf.Abs(targetSpeedDirection);
-
         if (brakePressed && currentSpeedInterpolation > 0f)
         {
             // Apply braking - faster deceleration
             isBraking = true;
             currentSpeedInterpolation = Mathf.MoveTowards(currentSpeedInterpolation, 0f, Time.deltaTime / brakingDuration);
         }
-        else if (targetInterpolation > 0)
+        else if (move > 0)
         {
             // Accelerate
             isBraking = false;
-            currentSpeedInterpolation = Mathf.MoveTowards(currentSpeedInterpolation, targetInterpolation, Time.deltaTime / accelerationDuration);
+            currentSpeedInterpolation = Mathf.MoveTowards(currentSpeedInterpolation, move, Time.deltaTime / accelerationDuration);
         }
         else
         {
@@ -78,12 +94,11 @@ public class VehicleController : MonoBehaviour
             currentSpeedInterpolation = Mathf.MoveTowards(currentSpeedInterpolation, 0f, Time.deltaTime / accelerationDuration);
         }
 
-        // Apply the appropriate curve
-        float curveValue;
+        // use accel curves
         if (isBraking)
         {
             // Braking curve: starts at 1 (full speed) and curves down to 0
-            float brakingProgress = 1f - (currentSpeedInterpolation / Mathf.Max(0.01f, currentSpeedInterpolation + Time.deltaTime / brakingDuration));
+            brakingProgress = 1f - (currentSpeedInterpolation / Mathf.Max(0.01f, currentSpeedInterpolation + Time.deltaTime / brakingDuration));
             curveValue = brakingCurve.Evaluate(brakingProgress) * currentSpeedInterpolation;
         }
         else
@@ -92,22 +107,24 @@ public class VehicleController : MonoBehaviour
             curveValue = accelerationCurve.Evaluate(currentSpeedInterpolation);
         }
 
-        float interpolatedSpeed = curveValue * forwardSpeed;
+        // After choosing whether to brake or accel, then calc the actual move amount
+        interpolatedSpeed = curveValue * forwardSpeed;
+        moveAmount = interpolatedSpeed * Time.deltaTime;
 
-        float moveAmount = interpolatedSpeed * Time.deltaTime;
 
+
+        steerAmount = 0f;
         // Apply steering only when there's movement, scaled by current speed interpolation
-        float steerAmount = 0f;
-
-        steerAmount = steer * steerSpeed * (4 / currentSpeedInterpolation) * Time.deltaTime;
-        leftFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, steerAmount * 30f); // Rotate left wheel
-        rightFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, steerAmount * 30f); // Rotate right wheel
-
-        transform.Translate(0, moveAmount, 0);
         if (currentSpeedInterpolation > 0.01f)
         {
-            transform.Rotate(0, 0, steerAmount);
+            // steer is left or right direction
+            steerAmount = steer * Mathf.MoveTowards(lastSteerAmount, steer, Time.deltaTime / accelerationDuration);
+            leftFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, steerAmount * 30f); // Rotate left wheel
+            rightFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, steerAmount * 30f); // Rotate right wheel
         }
+        lastSteerAmount = steerAmount;
+        transform.Rotate(0, 0, steerAmount);
+        transform.Translate(0, moveAmount, 0);
     }
 
 
