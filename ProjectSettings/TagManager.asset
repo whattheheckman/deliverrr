@@ -2,8 +2,10 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Packages
+  - Obstacles
   layers:
   - Default
   - TransparentFX
@@ -41,3 +43,29 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3140479063
+    locked: 0
+  - name: Road
+    uniqueID: 655078557
+    locked: 0
+  - name: Ground
+    uniqueID: 777942933
+    locked: 0
+  - name: Obstacles
+    uniqueID: 2277215779
+    locked: 0
+  - name: Pickups
+    uniqueID: 697964883
+    locked: 0
+  - name: Car
+    uniqueID: 285877097
+    locked: 0
+  - name: Effects
+    uniqueID: 481128599
+    locked: 0
+  - name: UI
+    uniqueID: 500910563
+    locked: 0
+  m_RenderingLayers:
+  - Default
