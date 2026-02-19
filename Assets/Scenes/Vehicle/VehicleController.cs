@@ -34,9 +34,8 @@ public class VehicleController : MonoBehaviour
     private float interpolatedSpeed = 0f;
     private float moveAmount = 0f;
 
-    private float lastSteerAmount = 0f;
-    private float steerAmount = 0f;
-
+    private float currentSteerT = 0f; // Track steering ramp up time
+    private float currentSteerAngle = 0f; // Actual angle applied
 
     //control variables
     private float move = 0f;
@@ -60,11 +59,11 @@ public class VehicleController : MonoBehaviour
         // check for steering
         if (Keyboard.current.aKey.isPressed)
         {
-            steerDirection = 1f;
+            steerDirection = -1f;
         }
         else if (Keyboard.current.dKey.isPressed)
         {
-            steerDirection = -1f;
+            steerDirection =  1f;
         }
 
         // Check for brake input (s key)
@@ -110,22 +109,51 @@ public class VehicleController : MonoBehaviour
         interpolatedSpeed = curveValue * forwardSpeed;
         moveAmount = interpolatedSpeed * Time.deltaTime;
 
-
-
-        steerAmount = 0f;
-        // Apply steering only when there's movement, scaled by current speed interpolation
+        // Apply steering only when there's movement
         if (currentSpeedInterpolation > 0.05f)
         {
-            // steer is left or right direction
-            steerAmount = steerDirection * Mathf.MoveTowards(Mathf.Abs(lastSteerAmount), 1, Time.deltaTime / steerSpeed);
+            // Calculate steering build-up rate based on speed (slower at high speeds)
+            // As currentSpeedInterpolation goes 0->1, factor goes 1->0.5 (example)
+            float speedFactor = Mathf.Lerp(1f, 0.4f, currentSpeedInterpolation);
+            
+            if (steerDirection != 0)
+            {
+                // Ramp up steering
+                currentSteerT = Mathf.MoveTowards(currentSteerT, 1f, Time.deltaTime * steerSpeed * speedFactor);
+            }
+            else
+            {
+                // Return to center (faster than steering into turn usually)
+                currentSteerT = Mathf.MoveTowards(currentSteerT, 0f, Time.deltaTime * steerSpeed * 2f);
+            }
 
-            // rotation should be scaled to maximum steer amount where maximum stter amount 
+            // Calculate actual steering angle using curve
+            // Note: steerDirection needs to be persistent if no input to unwind correctly, 
+            // but for simplicity here we assume we steer towards the last input direction or 0
+            float targetSign = steerDirection != 0 ? steerDirection : Mathf.Sign(currentSteerAngle);
+            if (currentSteerT == 0) targetSign = 0;
 
-            leftFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, steeringCurve.Evaluate(steerAmount / maximumSteerAmount)); // Rotate left wheel
-            rightFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, steeringCurve.Evaluate(steerAmount / maximumSteerAmount)); // Rotate right wheel
+            float curveAmount = steeringCurve.Evaluate(currentSteerT);
+            currentSteerAngle = targetSign * curveAmount * maximumSteerAmount;
+
+            // Visual wheel rotation
+            // Assuming Z-axis rotation for top-down 2D, or Y-axis for 3D car. 
+            // Original code used Z Euler for collision/transform, let's stick to that for wheels.
+            leftFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, -1f*currentSteerAngle); 
+            rightFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, -1f*currentSteerAngle);
+            
+            // Apply rotation to vehicle body
+            // Rotating the car based on the steering angle and distance moved
+            // A simple approximation for turning:
+            transform.Rotate(0, 0, -currentSteerAngle * currentSpeedInterpolation * Time.deltaTime * 2f); 
         }
-        lastSteerAmount = steerAmount;
-        transform.Rotate(0, 0, steerAmount);
+        else
+        {
+            // Reset steering when stopped
+            currentSteerT = 0f;
+            currentSteerAngle = 0f;
+        }
+
         transform.Translate(0, moveAmount, 0);
     }
 
