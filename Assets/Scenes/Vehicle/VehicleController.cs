@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-//using UnityEngine.Sprite;
 
 public class VehicleController : MonoBehaviour
 {
@@ -14,9 +13,9 @@ public class VehicleController : MonoBehaviour
     [Header("Steering")]
     [SerializeField] private GameObject leftFrontWheel;
     [SerializeField] private GameObject rightFrontWheel;
-    [SerializeField] private AnimationCurve steeringCurve = AnimationCurve.EaseOut(0,0, 1, 1);
-    [SerializeField] private float maximumSteerAmountInDegrees = 35f; 
-    [SerializeField] private float steerSpeed = 0.5f;
+    [SerializeField] private AnimationCurve steeringCurve = AnimationCurve.EaseInOut(0,0, 1, 1);
+    [SerializeField] private float maximumSteerAmount = 35f; 
+    [SerializeField] private float steerSpeed = 2f;
 
 
 
@@ -41,7 +40,7 @@ public class VehicleController : MonoBehaviour
 
     //control variables
     private float move = 0f;
-    private float steer = 0f;
+    private float steerDirection = 0f;
     private bool brakePressed = false;
 
     // Update is called once per frame
@@ -49,7 +48,7 @@ public class VehicleController : MonoBehaviour
     {
         // Reset current inputs at beginning of every frame
         move = 0f;
-        steer = 0f;
+        steerDirection = 0f;
         brakePressed = false;
 
         //decide to move forward or not
@@ -61,11 +60,11 @@ public class VehicleController : MonoBehaviour
         // check for steering
         if (Keyboard.current.aKey.isPressed)
         {
-            steer = 1f;
+            steerDirection = 1f;
         }
         else if (Keyboard.current.dKey.isPressed)
         {
-            steer = -1f;
+            steerDirection = -1f;
         }
 
         // Check for brake input (s key)
@@ -115,12 +114,15 @@ public class VehicleController : MonoBehaviour
 
         steerAmount = 0f;
         // Apply steering only when there's movement, scaled by current speed interpolation
-        if (currentSpeedInterpolation > 0.01f)
+        if (currentSpeedInterpolation > 0.05f)
         {
             // steer is left or right direction
-            steerAmount = steer * Mathf.MoveTowards(lastSteerAmount, steer, Time.deltaTime / accelerationDuration);
-            leftFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, steerAmount * 30f); // Rotate left wheel
-            rightFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, steerAmount * 30f); // Rotate right wheel
+            steerAmount = steerDirection * Mathf.MoveTowards(Mathf.Abs(lastSteerAmount), 1, Time.deltaTime / steerSpeed);
+
+            // rotation should be scaled to maximum steer amount where maximum stter amount 
+
+            leftFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, steeringCurve.Evaluate(steerAmount / maximumSteerAmount)); // Rotate left wheel
+            rightFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, steeringCurve.Evaluate(steerAmount / maximumSteerAmount)); // Rotate right wheel
         }
         lastSteerAmount = steerAmount;
         transform.Rotate(0, 0, steerAmount);
