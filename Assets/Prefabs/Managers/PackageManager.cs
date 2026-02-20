@@ -34,21 +34,23 @@ public class PackageManager : MonoBehaviour
             TimeSpan timeSpan = TimeSpan.FromSeconds(currentTime);
             timerText.text = string.Format("{0:00}:{1:00}.{2:00}",
                 timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds / 10);
+            packagesLeftText.text = "Packages left: \n" + packages.Count().ToString();
+            for (int i = 0; i < dropzones.Count(); i++)
+            {
+                if (packages[i].gameObject == null)
+                {
+                    dropzones[i].SetActive(true);
+                }
+            }
         } else
         {
             TimeSpan timeSpan = TimeSpan.FromSeconds(currentTime);
-
+            packagesLeftText.text = "Packages left: \n 0";
             timerText.text = "deliverrd. \n" + string.Format("{0:00}:{1:00}.{2:00}",
                 timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds / 10);
+            Destroy(this, Time.deltaTime * 3f);
         }
-        packagesLeftText.text = packages.Count().ToString();
-        for (int i = 0; i < dropzones.Count(); i++)
-        {
-            if (packages[i].gameObject == null)
-            {
-                dropzones[i].SetActive(true);
-            }
-        }
+        
 
     }
 

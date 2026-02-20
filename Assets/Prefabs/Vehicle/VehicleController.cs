@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.ParticleSystem;
 
 public class VehicleController : MonoBehaviour
 {
@@ -16,14 +17,9 @@ public class VehicleController : MonoBehaviour
     [SerializeField] private float maximumSteerAmount = 35f; 
     [SerializeField] private float steerSpeed = 2f;
 
-
-
-
     [Header("Braking")]
     [SerializeField] private AnimationCurve brakingCurve = AnimationCurve.EaseInOut(0, 1, 1, 0);
     [SerializeField] private float brakingDuration = 0.5f;
-
-
 
     private float currentSpeedInterpolation = 0f;
     private bool isBraking = false;
@@ -40,6 +36,16 @@ public class VehicleController : MonoBehaviour
     private float move = 0f;
     private float steerDirection = 0f;
     private bool brakePressed = false;
+
+    private ParticleSystem exhaustParticles;
+    private Vector3 lastPos = Vector3.zero;
+    private Vector3 currentPos = Vector3.zero;
+    private float speed = 0f;
+
+    void Start()
+    {
+        exhaustParticles = GetComponent<ParticleSystem>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -154,6 +160,16 @@ public class VehicleController : MonoBehaviour
         }
 
         transform.Translate(0, moveAmount, 0);
+
+        lastPos = currentPos;
+        currentPos = this.transform.position;
+        speed = (currentPos - lastPos).magnitude / Time.deltaTime;
+
+
+
+        //TODO: particle system amount based on speed
+        var emiss = exhaustParticles.emission;
+        emiss.rateOverTime = Mathf.Lerp(3, 20, speed / forwardSpeed);
     }
 
 

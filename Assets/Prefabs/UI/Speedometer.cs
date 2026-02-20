@@ -15,20 +15,20 @@ public class Speedometer : MonoBehaviour
     
     private float speed = 0.0f;
 
-    private float target_lastPos = 0.0f;
-    private float target_currentPos = 0.0f;
+    private Vector3 target_lastPos = Vector3.zero;
+    private Vector3 target_currentPos = Vector3.zero;
 
    
     private void Update()
     {
         target_lastPos = target_currentPos;
-        target_currentPos = GameObject_target.transform.position.magnitude;
-        speed = (target_currentPos - target_lastPos ) / Time.deltaTime;
+        target_currentPos = GameObject_target.transform.position;
+        speed = (target_currentPos - target_lastPos).magnitude / Time.deltaTime;
 
 
-        
-        
-        arrow.transform.localEulerAngles.Set(0,0, Mathf.Lerp(minSpeedArrowAngle, maxSpeedArrowAngle, speed / maxSpeed));
+
+
+        arrow.transform.localRotation.eulerAngles.Set(0,0, Mathf.Lerp(minSpeedArrowAngle, maxSpeedArrowAngle, speed / maxSpeed));
         speedo.color = Color.Lerp(Color.white, Color.red, speed / maxSpeed);
     }
 }
