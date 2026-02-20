@@ -159,7 +159,11 @@ public class VehicleController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Bumped into something!");
-        //currentSpeed = slowSpeed;
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            forwardSpeed *= .93f;
+        } else if (collision.gameObject.CompareTag("Boost")){
+            forwardSpeed *= 1.10f;
+        }
     }
 }

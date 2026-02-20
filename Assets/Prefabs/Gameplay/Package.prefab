@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7813502140206703891}
   - component: {fileID: 5521218198704553025}
+  - component: {fileID: 2223852133563886480}
   m_Layer: 0
   m_Name: Package
-  m_TagString: Untagged
+  m_TagString: Packages
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +69,21 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.61
+  m_Radius: 0.76
+--- !u!114 &2223852133563886480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78390467449385305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35a195cb83235f7478b9e5d435815843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceIndicator
+  indicatorSprite: {fileID: 4597347868636102865, guid: 1d6ed27b0e748c8488ad5e655eddf20a, type: 3}
+  margin: 50
 --- !u!1 &6978566668368463516
 GameObject:
   m_ObjectHideFlags: 0

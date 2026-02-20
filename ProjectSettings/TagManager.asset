@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Packages
   - Obstacles
+  - Dropzone
   layers:
   - Default
   - TransparentFX

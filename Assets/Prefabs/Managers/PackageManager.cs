@@ -15,7 +15,6 @@ public class PackageManager : MonoBehaviour
 
 
     private float currentTime;
-    private bool isRunning = false;
 
     void Start()
     {
@@ -43,6 +42,14 @@ public class PackageManager : MonoBehaviour
                 timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds / 10);
         }
         packagesLeftText.text = packages.Count().ToString();
+        for (int i = 0; i < dropzones.Count(); i++)
+        {
+            if (packages[i].gameObject == null)
+            {
+                dropzones[i].SetActive(true);
+            }
+        }
+
     }
 
 
