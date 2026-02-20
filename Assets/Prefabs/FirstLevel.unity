@@ -29810,6 +29810,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4376678507071987028, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
+      propertyPath: steerSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376678507071987028, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
+      propertyPath: maximumSteerAmount
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376678507071987028, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].inSlope
+      value: 1.8701298
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376678507071987028, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].inSlope
+      value: 3.1746018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376678507071987028, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].outSlope
+      value: 1.8701298
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376678507071987028, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].inWeight
+      value: 0.037500024
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376678507071987028, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].outSlope
+      value: 3.1746018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376678507071987028, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].outWeight
+      value: 0.045833334
+      objectReference: {fileID: 0}
     - target: {fileID: 7121161401470262480, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
       propertyPath: m_Name
       value: Vehicle

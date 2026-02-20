@@ -3,7 +3,6 @@ using UnityEngine;
 public class Speedometer : MonoBehaviour
 {
     [SerializeField] private GameObject GameObject_target;
-    private Rigidbody2D target;
 
     [SerializeField] private float maxSpeed = 0.0f; // The maximum speed of the target 
 
@@ -13,19 +12,21 @@ public class Speedometer : MonoBehaviour
     [Header("UI")]
     [SerializeField] private SpriteRenderer speedo; // The speedometer;
     [SerializeField] private GameObject arrow; // The arrow in the speedometer
-
+    
     private float speed = 0.0f;
 
-    private void Awake()
-    {
-        target = GameObject_target.GetComponent<Rigidbody2D>();
-    }
+    private float target_lastPos = 0.0f;
+    private float target_currentPos = 0.0f;
 
+   
     private void Update()
     {
-        
-        speed = target.linearVelocity.magnitude;
+        target_lastPos = target_currentPos;
+        target_currentPos = GameObject_target.transform.position.magnitude;
+        speed = (target_currentPos - target_lastPos ) / Time.deltaTime;
 
+
+        
         
         arrow.transform.localEulerAngles.Set(0,0, Mathf.Lerp(minSpeedArrowAngle, maxSpeedArrowAngle, speed / maxSpeed));
         speedo.color = Color.Lerp(Color.white, Color.red, speed / maxSpeed);

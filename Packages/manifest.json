@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.handzlikchris.fastscriptreload": "https://github.com/handzlikchris/FastScriptReload.git?path=Assets",
     "com.unity.2d.aseprite": "3.0.1",
     "com.unity.2d.psdimporter": "12.0.1",
     "com.unity.2d.sprite": "1.0.0",
