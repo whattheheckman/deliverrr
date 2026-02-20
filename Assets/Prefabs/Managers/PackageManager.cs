@@ -1,36 +1,49 @@
-using UnityEngine;
+using System;
+using System.Linq;
 using TMPro;
-using System.Collections.Generic;
+using UnityEngine;
 
 public class PackageManager : MonoBehaviour
 {
     [Header("Packages")]
-    [SerializeField] private GameObject packageInstance;
-    [SerializeField] private Transform[] spawnLocations;
+    [SerializeField] private GameObject[] packages;
+    [Header("Dropzones")]
+    [SerializeField] private GameObject[] dropzones;
     [Header("UI")]
+    [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI packagesLeftText;
 
-    private 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private float currentTime;
+    private bool isRunning = false;
+
     void Start()
     {
-        foreach (Transform spawnLocation in spawnLocations)
+        foreach (var zone in dropzones)
         {
-            if (spawnLocation != null)
-            {
-                continue;
-            }
-            else
-            {
-                Instantiate(packageInstance, spawnLocation.position, spawnLocation.rotation);
-            }
+            zone.SetActive(false);
         }
+        currentTime = 0f;
+        timerText.text = "00:00.00";
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (dropzones.Count() != 0)
+        {
+            currentTime += Time.deltaTime;
+            TimeSpan timeSpan = TimeSpan.FromSeconds(currentTime);
+            timerText.text = string.Format("{0:00}:{1:00}.{2:00}",
+                timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds / 10);
+        } else
+        {
+            TimeSpan timeSpan = TimeSpan.FromSeconds(currentTime);
+
+            timerText.text = "deliverrd. \n" + string.Format("{0:00}:{1:00}.{2:00}",
+                timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds / 10);
+        }
+        packagesLeftText.text = packages.Count().ToString();
     }
+
+
 }
