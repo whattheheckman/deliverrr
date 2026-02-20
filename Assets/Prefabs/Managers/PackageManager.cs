@@ -1,9 +1,13 @@
 using UnityEngine;
+using TMPro;
+using System.Collections.Generic;
 
 public class PackageManager : MonoBehaviour
 {
 
-    //[SerializeField] private UICanvas canvas;
+    [SerializeField] private TextMeshProUGUI packagesLeftText;
+    [SerializeField] private GameObject packageInstance;
+    [SerializeField] private List<GameObject> spawnLocations;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
