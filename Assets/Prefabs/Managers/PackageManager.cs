@@ -37,8 +37,9 @@ public class PackageManager : MonoBehaviour
             packagesLeftText.text = "Packages left: \n" + packages.Count().ToString();
             for (int i = 0; i < dropzones.Count(); i++)
             {
-                if (packages[i].gameObject == null)
+                if (!packages[i].gameObject.activeSelf)
                 {
+                    Debug.Log("package with index " + i + "must've been picked up!. Setting dropzone " + i + "active!");
                     dropzones[i].SetActive(true);
                 }
             }
