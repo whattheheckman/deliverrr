@@ -4,22 +4,15 @@ using System.Collections;
 public class Interactable : MonoBehaviour
 {
 
+    [SerializeField] ParticleSystem unusedParticles;
+    [SerializeField] ParticleSystem usedParticles;
     [SerializeField] Color disabledColor = new Color(1f, 1f,1f, 0.5f);
     [SerializeField] float speedMultiplier = 1.5f;
     [SerializeField] float duration = 5f;
-
-
-    SpriteRenderer spriteRenderer;
-    ParticleSystem particles;
-    Collider2D collider;
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Collider2D pickupCollider;
     private bool used = false;
 
-    void Start()
-    {
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        particles = GetComponent<ParticleSystem>();
-        collider = GetComponent<Collider2D>();
-    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,7 +21,8 @@ public class Interactable : MonoBehaviour
         {
             Debug.Log("it'd be the player!");
             used = true;
-            if (particles != null) {particles.Play();}
+            if (unusedParticles != null) {unusedParticles.Stop();}
+            if (usedParticles != null) {usedParticles.Play();}
             if (spriteRenderer != null) {spriteRenderer.color *= disabledColor;}
 
             var playerMovement = collision.GetComponent<VehicleController>();
@@ -36,7 +30,7 @@ public class Interactable : MonoBehaviour
             {
                 StartCoroutine(ApplySpeedBoost(playerMovement));
             }
-            collider.enabled =false;
+            pickupCollider.enabled =false;
 
         }
     }
