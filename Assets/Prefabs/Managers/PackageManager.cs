@@ -12,6 +12,7 @@ public class PackageManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI packagesLeftText;
+    [SerializeField] 
 
 
     private float currentTime;

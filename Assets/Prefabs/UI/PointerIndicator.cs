@@ -12,7 +12,7 @@ public class ScreenSpaceIndicator : MonoBehaviour
     void Awake()
     {
         mainCam = Camera.main;
-
+        
         // Ensure we have a SpriteRenderer to show the sprite
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null && indicatorSprite != null)
