@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7813502140206703891}
   - component: {fileID: 5521218198704553025}
   - component: {fileID: 2223852133563886480}
+  - component: {fileID: 1562511274531256596}
   m_Layer: 0
   m_Name: Package
   m_TagString: Packages
@@ -84,6 +85,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceIndicator
   indicatorSprite: {fileID: 4597347868636102865, guid: 1d6ed27b0e748c8488ad5e655eddf20a, type: 3}
   margin: 50
+--- !u!114 &1562511274531256596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78390467449385305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62df9e1cccd9674eb282ce1ef063926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Package
 --- !u!1 &6978566668368463516
 GameObject:
   m_ObjectHideFlags: 0
