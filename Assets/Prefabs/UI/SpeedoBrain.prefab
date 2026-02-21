@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8772536130787297553}
   - component: {fileID: 2352369570736881939}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Arc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7633427068366700872}
   - component: {fileID: 5085808890677150392}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7891698219404553842}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Needle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4395643305835360726}
   - component: {fileID: 2447743663126698316}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SpeedoBrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,8 +271,9 @@ MonoBehaviour:
   maxSpeed: 12
   minSpeedArrowAngle: 90
   maxSpeedArrowAngle: -80
-  speedo: {fileID: 2352369570736881939}
+  speedoGraphics: {fileID: 0}
   arrow: {fileID: 3922161364672644848}
+  speedText: {fileID: 0}
 --- !u!1 &8171628083705803446
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7542523161857029176}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}

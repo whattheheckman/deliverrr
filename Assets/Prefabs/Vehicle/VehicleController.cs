@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 using static UnityEngine.ParticleSystem;
 
 public class VehicleController : MonoBehaviour
@@ -21,8 +22,13 @@ public class VehicleController : MonoBehaviour
     [SerializeField] private AnimationCurve brakingCurve = AnimationCurve.EaseInOut(0, 1, 1, 0);
     [SerializeField] private float brakingDuration = 0.5f;
 
+    [Header("Tilemap Speed Reduction")]
+    [SerializeField] private float speedReductionMultiplier = 0.5f; // 0.5 = 50% speed
+    [SerializeField] private string groundSortingLayerName = "Ground";
+
     private float currentSpeedInterpolation = 0f;
     private bool isBraking = false;
+    private bool isOnSlowTilemap = false;
 
     private float curveValue;
     private float brakingProgress = 0f;
@@ -56,6 +62,35 @@ public class VehicleController : MonoBehaviour
     {
         return forwardSpeed;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Check if the collider belongs to a tilemap on the ground sorting layer
+        Tilemap tilemap = collision.GetComponent<Tilemap>();
+        if (tilemap != null)
+        {
+            TilemapRenderer tilemapRenderer = tilemap.GetComponent<TilemapRenderer>();
+            if (tilemapRenderer != null && tilemapRenderer.sortingLayerName == groundSortingLayerName)
+            {
+                isOnSlowTilemap = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // Check if leaving the tilemap on the ground sorting layer
+        Tilemap tilemap = collision.GetComponent<Tilemap>();
+        if (tilemap != null)
+        {
+            TilemapRenderer tilemapRenderer = tilemap.GetComponent<TilemapRenderer>();
+            if (tilemapRenderer != null && tilemapRenderer.sortingLayerName == groundSortingLayerName)
+            {
+                isOnSlowTilemap = false;
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -120,7 +155,8 @@ public class VehicleController : MonoBehaviour
         }
 
         // After choosing whether to brake or accel, then calc the actual move amount
-        interpolatedSpeed = curveValue * forwardSpeed;
+        float effectiveSpeed = isOnSlowTilemap ? forwardSpeed * speedReductionMultiplier : forwardSpeed;
+        interpolatedSpeed = curveValue * effectiveSpeed;
         moveAmount = interpolatedSpeed * Time.deltaTime;
 
         // Apply steering only when there's movement
