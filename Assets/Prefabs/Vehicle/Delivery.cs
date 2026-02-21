@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class Delivery : MonoBehaviour
 {
-    [Header("Package Settings")]
+    [Header("Indicator Settings")]
     [SerializeField] Color packageColor = Color.yellow;
     [SerializeField] Color normalColor = Color.white;
 
+    [SerializeField] PackageManager packageManager;
+    
     SpriteRenderer spriteRenderer;
     private bool hasPackage = false;
 
@@ -33,6 +35,10 @@ public class Delivery : MonoBehaviour
             hasPackage = false;
             spriteRenderer.color = normalColor;
             Destroy(collision.gameObject, Time.deltaTime * 2f);
+            if (packageManager != null)
+            {
+                packageManager.UpdateDeliveredPackageCount();
+            }
         }
     }
 

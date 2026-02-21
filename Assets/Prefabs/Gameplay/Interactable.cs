@@ -6,7 +6,7 @@ public class Interactable : MonoBehaviour
 
     [SerializeField] ParticleSystem unusedParticles;
     [SerializeField] ParticleSystem usedParticles;
-    [SerializeField] Color disabledColor = new Color(1f, 1f,1f, 0.5f);
+    [SerializeField] Color disabledColor = new Color(1f, 1f, 1f, 0.4f);
     [SerializeField] float speedMultiplier = 1.5f;
     [SerializeField] float duration = 5f;
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -17,20 +17,20 @@ public class Interactable : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log(collision);
-        if (collision.CompareTag("Player") && !used) 
+        if (collision.CompareTag("Player") && !used)
         {
             Debug.Log("it'd be the player!");
             used = true;
-            if (unusedParticles != null) {unusedParticles.Stop();}
-            if (usedParticles != null) {usedParticles.Play();}
-            if (spriteRenderer != null) {spriteRenderer.color *= disabledColor;}
+            if (unusedParticles != null) { unusedParticles.Stop(); }
+            if (usedParticles != null) { usedParticles.Play(); }
+            if (spriteRenderer != null) { spriteRenderer.color *= disabledColor; }
 
             var playerMovement = collision.GetComponent<VehicleController>();
             if (playerMovement != null)
             {
                 StartCoroutine(ApplySpeedBoost(playerMovement));
             }
-            pickupCollider.enabled =false;
+            pickupCollider.enabled = false;
 
         }
     }

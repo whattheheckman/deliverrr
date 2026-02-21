@@ -556,6 +556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7949235421922639014}
   - component: {fileID: 4376678507071987028}
+  - component: {fileID: 4903615929769915599}
   - component: {fileID: -128684987162452505}
   - component: {fileID: 3491226722514827082}
   - component: {fileID: 2674758594243602767}
@@ -680,6 +681,22 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   brakingDuration: 1.25
+--- !u!114 &4903615929769915599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7121161401470262480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e06a640fc6852940ba2782676ebf965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PackageManager
+  packages: []
+  dropzones: []
+  timerText: {fileID: 0}
+  packagesLeftText: {fileID: 0}
 --- !u!114 &-128684987162452505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -694,6 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Delivery
   packageColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
+  packageManager: {fileID: 4903615929769915599}
 --- !u!61 &3491226722514827082
 BoxCollider2D:
   m_ObjectHideFlags: 0
