@@ -47,6 +47,15 @@ public class VehicleController : MonoBehaviour
         exhaustParticles = GetComponent<ParticleSystem>();
     }
 
+    public void setSpeed(float speed)
+    {
+        forwardSpeed = speed;
+    }
+
+    public float getSpeed()
+    {
+        return forwardSpeed;
+    }
     // Update is called once per frame
     void Update()
     {
