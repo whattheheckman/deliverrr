@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7813502140206703891}
   - component: {fileID: 5521218198704553025}
-  - component: {fileID: 1562511274531256596}
   - component: {fileID: 849863841765370619}
+  - component: {fileID: 1562511274531256596}
+  - component: {fileID: 3090973823875003777}
   m_Layer: 0
   m_Name: Package
   m_TagString: Packages
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -70,18 +71,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.76
---- !u!114 &1562511274531256596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 78390467449385305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c62df9e1cccd9674eb282ce1ef063926, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Package
 --- !u!212 &849863841765370619
 SpriteRenderer:
   serializedVersion: 2
@@ -141,3 +130,30 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1562511274531256596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78390467449385305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62df9e1cccd9674eb282ce1ef063926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Package
+--- !u!114 &3090973823875003777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78390467449385305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab813d479774fb64a85c5dccc1cee2ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PointerIndicatorController
+  indicatorSprite: {fileID: 592088742, guid: 8fed60f111c46e14b9d939ed48a5d185, type: 3}
+  margin: 50
+  spriteColor: {r: 1, g: 0.70070094, b: 0, a: 0}

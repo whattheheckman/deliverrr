@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Collider2D))]
 public class Package : MonoBehaviour
 {
     private int packageId;
@@ -11,6 +13,15 @@ public class Package : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         myCollider = GetComponent<Collider2D>();
+        if (myCollider == null)
+        {
+            Debug.LogError("missing collider component for package: " + this.name);
+        }
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("missing sprite component for package: " + this.name);
+        }
+    
     }
 
     public bool packageCanBePickedUp() {return isPickupable;}

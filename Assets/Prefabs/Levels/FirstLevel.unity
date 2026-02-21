@@ -29599,7 +29599,7 @@ GameObject:
   - component: {fileID: 1949387597}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30001,6 +30001,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Packages
       objectReference: {fileID: 0}
+    - target: {fileID: 849863841765370619, guid: b6d7de697ba3138459279c7d7c76fd48, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a9f2c90b62d9de94b91e4b87391eee20, type: 2}
     - target: {fileID: 7813502140206703891, guid: b6d7de697ba3138459279c7d7c76fd48, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.95
@@ -30202,6 +30206,14 @@ PrefabInstance:
     - target: {fileID: 1079073790821414194, guid: 24654c48946f2f44e97e8d2d310c58a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657940510577524782, guid: 24654c48946f2f44e97e8d2d310c58a6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -793
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657940510577524782, guid: 24654c48946f2f44e97e8d2d310c58a6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -508
       objectReference: {fileID: 0}
     - target: {fileID: 6808972091685988671, guid: 24654c48946f2f44e97e8d2d310c58a6, type: 3}
       propertyPath: m_Name

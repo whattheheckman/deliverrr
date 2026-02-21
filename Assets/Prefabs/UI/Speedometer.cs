@@ -28,8 +28,8 @@ public class Speedometer : MonoBehaviour
         speed = (target_currentPos - target_lastPos).magnitude / Time.deltaTime;
 
 
-        speedText.text = string.Format("{00:F1} MPH", speed);
-        arrow.transform.localRotation.eulerAngles.Set(0,0, Mathf.Lerp(minSpeedArrowAngle, maxSpeedArrowAngle, speed / maxSpeed));
+        speedText.text = string.Format("{00:F1}mph", speed);
+        arrow.transform.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(minSpeedArrowAngle, maxSpeedArrowAngle, speed / maxSpeed));
         speedoGraphics.color = Color.Lerp(Color.white, Color.red, speed / maxSpeed);
     }
 }
