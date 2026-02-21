@@ -19,38 +19,46 @@ public class PackageManager : MonoBehaviour
 
     void Start()
     {
-        foreach (var zone in dropzones)
+        if (dropzones.Count() != packages.Count())
         {
-            zone.SetActive(false);
+            Debug.LogError("Package and drop zone count doesn't match! early returning from Start()" );
+            return;
+        }
+        for (int i = 0; i < packages.Count(); i++)
+        {
+        
+            dropzones[i].GetComponent<Package>().setPackageCanBePickedUp(false);
+            dropzones[i].GetComponent<Package>().setPackageID(i);
+            packages[i].GetComponent<Package>().setPackageCanBePickedUp(true);
+            packages[i].GetComponent<Package>().setPackageID(i);
         }
         currentTime = 0f;
         timerText.text = "00:00.00";
         packagesRemainingCount = dropzones.Count();
     }
 
-    public void UpdateDeliveredPackageCount()
+    public void pickupPackage(int packageId)
+    {   
+        packages[packageId].GetComponent<Package>().setPackageCanBePickedUp(false);
+        dropzones[packageId].GetComponent<Package>().setPackageCanBePickedUp(true);
+    }
+
+    public void dropoffPackage(int dropzoneID)
     {
-        packagesRemainingCount--;
+        dropzones[dropzoneID].GetComponent<Package>().setPackageCanBePickedUp(false);
+        packagesRemainingCount-= 1;
     }
 
     void Update()
     {
         
-        if (packagesRemainingCount != 0)
+        if (packagesRemainingCount > 0)
         {
             currentTime += Time.deltaTime;
             TimeSpan timeSpan = TimeSpan.FromSeconds(currentTime);
             timerText.text = string.Format("{0:00}:{1:00}.{2:00}",
                 timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds / 10);
             packagesLeftText.text = "Packages left: \n" + packagesRemainingCount.ToString();
-            for (int i = 0; i < dropzones.Count(); i++)
-            {
-                if (!packages[i].gameObject.activeSelf)
-                {
-                    Debug.Log("package with index " + i + "must've been picked up!. Setting dropzone " + i + "active!");
-                    dropzones[i].SetActive(true);
-                }
-            }
         } else
         {
             TimeSpan timeSpan = TimeSpan.FromSeconds(currentTime);

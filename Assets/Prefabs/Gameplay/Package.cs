@@ -5,9 +5,9 @@ public class Package : MonoBehaviour
     private int packageId;
     private SpriteRenderer spriteRenderer;
     private Collider2D myCollider;
-    private bool isPickupable = false;
+    private bool isPickupable = true;
 
-    void OnStart()
+    void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         myCollider = GetComponent<Collider2D>();

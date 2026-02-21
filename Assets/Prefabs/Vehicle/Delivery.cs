@@ -15,6 +15,11 @@ public class Delivery : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (packageManager == null)
+        {
+            Debug.LogError("Package manager is null! can't pickup or drop off packages!");
+
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -22,22 +27,34 @@ public class Delivery : MonoBehaviour
         // Pick up package
         if (collision.CompareTag("Packages") && !hasPackage)
         {
+            int packageIndice = collision.GetComponent<Package>().getPackageID();
             Debug.Log("Picked up package");
             hasPackage = true;
             spriteRenderer.color = packageColor;
-            collision.gameObject.SetActive(false);
+            if (packageManager != null)
+            {
+                packageManager.pickupPackage(packageIndice);
+                
+            } else
+            {
+                Debug.LogError("Package manager is null! can't pickup package");
+            }
+
         }
 
         // Deliver to customer
         if (collision.CompareTag("Dropzone") && hasPackage)
         {
+            int dropzoneIndice = collision.GetComponent<Package>().getPackageID();
             Debug.Log("Delivered package!");
             hasPackage = false;
             spriteRenderer.color = normalColor;
-            Destroy(collision.gameObject, Time.deltaTime * 2f);
             if (packageManager != null)
             {
-                packageManager.UpdateDeliveredPackageCount();
+                packageManager.dropoffPackage(dropzoneIndice);
+            } else
+            {
+                Debug.LogError("Package manager is null! can't pickup package");
             }
         }
     }

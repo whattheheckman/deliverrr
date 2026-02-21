@@ -29872,6 +29872,18 @@ PrefabInstance:
       value: Vehicle
       objectReference: {fileID: 0}
     - target: {fileID: 7949235421922639014, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949235421922639014, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949235421922639014, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949235421922639014, guid: afab50b8e600a0b4e97a198ccf5e26bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.24
       objectReference: {fileID: 0}
