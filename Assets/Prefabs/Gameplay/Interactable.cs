@@ -11,12 +11,14 @@ public class Interactable : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
     ParticleSystem particles;
+    Collider2D collider;
     private bool used = false;
 
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         particles = GetComponent<ParticleSystem>();
+        collider = GetComponent<Collider2D>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -34,6 +36,8 @@ public class Interactable : MonoBehaviour
             {
                 StartCoroutine(ApplySpeedBoost(playerMovement));
             }
+            collider.enabled =false;
+
         }
     }
 

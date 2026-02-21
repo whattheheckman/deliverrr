@@ -692,7 +692,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d000727f1c382394cac12f8ca815a366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Delivery
-  destroyDelay: 0.5
   packageColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!61 &3491226722514827082
@@ -958,7 +957,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 0.22745098}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
