@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class Speedometer : MonoBehaviour
 {
@@ -10,8 +11,9 @@ public class Speedometer : MonoBehaviour
     [SerializeField] private float maxSpeedArrowAngle;
 
     [Header("UI")]
-    [SerializeField] private SpriteRenderer speedo; // The speedometer;
-    [SerializeField] private GameObject arrow; // The arrow in the speedometer
+    [SerializeField] private SpriteRenderer speedoGraphics; // The speedometer;
+    [SerializeField] private GameObject arrow; // The arrow in the speedometer\
+    [SerializeField] private TextMeshProUGUI speedText;
     
     private float speed = 0.0f;
 
@@ -26,9 +28,8 @@ public class Speedometer : MonoBehaviour
         speed = (target_currentPos - target_lastPos).magnitude / Time.deltaTime;
 
 
-
-
+        speedText.text = string.Format("{00:F1} MPH", speed);
         arrow.transform.localRotation.eulerAngles.Set(0,0, Mathf.Lerp(minSpeedArrowAngle, maxSpeedArrowAngle, speed / maxSpeed));
-        speedo.color = Color.Lerp(Color.white, Color.red, speed / maxSpeed);
+        speedoGraphics.color = Color.Lerp(Color.white, Color.red, speed / maxSpeed);
     }
 }

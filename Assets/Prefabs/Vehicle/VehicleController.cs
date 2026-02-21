@@ -181,14 +181,4 @@ public class VehicleController : MonoBehaviour
         emiss.rateOverTime = Mathf.Lerp(3, 20, speed / forwardSpeed);
     }
 
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            forwardSpeed *= .93f;
-        } else if (collision.gameObject.CompareTag("Boost")){
-            forwardSpeed *= 1.10f;
-        }
-    }
 }

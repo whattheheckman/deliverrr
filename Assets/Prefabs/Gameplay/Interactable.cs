@@ -1,12 +1,12 @@
 using UnityEngine;
-using System.Collections; // Required for IEnumerator
+using System.Collections;
 
 public class Interactable : MonoBehaviour
 {
 
     [SerializeField] Color disabledColor = new Color(1f, 1f,1f, 0.5f);
     [SerializeField] float speedMultiplier = 1.5f;
-    [SerializeField] float duration = 2f;
+    [SerializeField] float duration = 5f;
 
 
     SpriteRenderer spriteRenderer;
@@ -21,11 +21,13 @@ public class Interactable : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        //Debug.Log(collision);
         if (collision.CompareTag("Player") && !used) 
         {
+            Debug.Log("it'd be the player!");
             used = true;
-            if (particles != null) particles.Play();
-            if (spriteRenderer != null) spriteRenderer.color *= disabledColor;
+            if (particles != null) {particles.Play();}
+            if (spriteRenderer != null) {spriteRenderer.color *= disabledColor;}
 
             var playerMovement = collision.GetComponent<VehicleController>();
             if (playerMovement != null)

@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 4395643305835360726}
   - component: {fileID: 2447743663126698316}
   m_Layer: 0
-  m_Name: Speedometer
+  m_Name: SpeedoBrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
