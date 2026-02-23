@@ -132,15 +132,16 @@ public class PhysicsVehicle1 : MonoBehaviour
         // Handle rotation to follow mouse cursor
         if (mainCamera != null && Mouse.current != null && rb != null)
         {
-            Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            Debug.Log($"mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()) {mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue())}");
+            Vector3 mousePosition = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0);
+            Vector3 mouseWorldPosition = mainCamera.ScreenToViewportPoint(mousePosition);
+            //Debug.Log($"mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()) {mainCamera.ScreenToViewportPoint(mousePosition)}");
             mousePosition.z = 0f;
 
-            Vector2 direction = (mousePosition - (Vector3)rb.position).normalized;
+            Vector2 direction = (mousePosition - (Vector3)mainCamera.WorldToScreenPoint(rb.position));
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
             // Smoothly rotate towards target angle
-            float newAngle = Mathf.MoveTowardsAngle(rb.rotation, targetAngle, rotationSpeed * 100f * Time.fixedDeltaTime);
+            float newAngle = Mathf.MoveTowardsAngle(rb.rotation, targetAngle, rotationSpeed * 10f * Time.fixedDeltaTime);
             rb.SetRotation(newAngle);
             //Debug.Log($"Rotating to: {targetAngle}, moving towards: {newAngle}, Current: {rb.rotation}");
         }
