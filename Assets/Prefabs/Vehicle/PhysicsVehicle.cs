@@ -30,8 +30,8 @@ public class PhysicsVehicle : MonoBehaviour
 
     private EmissionModule particleEmission;
     private Color32 defaultParticleColor;
-    private Color32 slowParticleColor = new Color32(67, 67, 67, 240);
-    private Color32 fastParticleColor = new Color32(255, 215, 0, 255);
+    private Color32 slowParticleColor = new(67, 67, 67, 240);
+    private Color32 fastParticleColor = new(255, 215, 0, 255);
 
     void Start()
     {
@@ -134,7 +134,6 @@ public class PhysicsVehicle : MonoBehaviour
         if (mainCamera != null && Mouse.current != null && rb != null)
         {
             Vector3 mousePosition = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0);
-            Vector3 mouseWorldPosition = mainCamera.ScreenToViewportPoint(mousePosition);
             //Debug.Log($"mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()) {mainCamera.ScreenToViewportPoint(mousePosition)}");
             mousePosition.z = 0f;
 

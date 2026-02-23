@@ -27,7 +27,7 @@ public class Interactable : MonoBehaviour
                 usedParticles.Play(); }
             if (spriteRenderer != null) { spriteRenderer.color *= disabledColor; }
 
-            var playerMovement = collision.GetComponent<VehicleController>();
+            var playerMovement = collision.GetComponent<PhysicsVehicle>();
             if (playerMovement != null)
             {
                 StartCoroutine(ApplySpeedBoost(playerMovement));
@@ -37,7 +37,7 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    IEnumerator ApplySpeedBoost(VehicleController player)
+    IEnumerator ApplySpeedBoost(PhysicsVehicle player)
     {
         float originalSpeed = player.getSpeed();
         player.setSpeed(originalSpeed * speedMultiplier);
