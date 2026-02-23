@@ -6543,6 +6543,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1601941086854189240, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064493442272971464, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: exhaustParticles
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4903615929769915599, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
       propertyPath: timerText
       value: 
