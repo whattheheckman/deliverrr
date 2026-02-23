@@ -367,7 +367,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.15
+      scalar: 0.36
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4868,8 +4868,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4676786951699351533}
   - {fileID: 8833949898961046656}
+  - {fileID: 4676786951699351533}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6888417024685010123
@@ -4884,8 +4884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122ecaf6b9292ee4699689564407eb66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  unusedParticles: {fileID: 0}
-  usedParticles: {fileID: 0}
+  unusedParticles: {fileID: 5425593850567659257}
+  usedParticles: {fileID: 8976431166573252560}
   disabledColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 0.2627451}
   speedMultiplier: 0.8
   duration: 2
@@ -5084,8 +5084,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 481128599
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_RenderMode: 0

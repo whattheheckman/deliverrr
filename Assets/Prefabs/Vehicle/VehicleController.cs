@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -38,6 +39,7 @@ public class VehicleController : MonoBehaviour
     private float brakingProgress = 0f;
     private float interpolatedSpeed = 0f;
     private float moveAmount = 0f;
+    private float defaultForwardSpeed = 10f;
 
     private float currentSteerT = 0f; // Track steering ramp up time
     private float currentSteerAngle = 0f; // Actual angle applied
@@ -51,13 +53,33 @@ public class VehicleController : MonoBehaviour
     private Vector3 currentPos = Vector3.zero;
     private float speed = 0f;
 
+    private EmissionModule particleEmission;
     void Start()
     {
+        defaultForwardSpeed = forwardSpeed;
+        if (exhaustParticles != null)
+        {
+            particleEmission = exhaustParticles.emission;
+        } else
+        {
+            Debug.Log("particle system not found, make sure to assign to VehicleController in editor!");
+        }
     }
 
     public void setSpeed(float speed)
     {
         forwardSpeed = speed;
+        if (speed < defaultForwardSpeed)
+        {
+            exhaustParticles.startColor = new Color32(255, 215, 0, 255);
+        } else if (speed > defaultForwardSpeed)
+        {
+            exhaustParticles.startColor = new Color32(67, 67, 67, 240);
+        } else
+        {
+            exhaustParticles.startColor = new Color32(255, 255, 255, 255);
+        }
+        
     }
 
     public float getSpeed()
@@ -215,8 +237,9 @@ public class VehicleController : MonoBehaviour
 
 
         //TODO: particle system amount based on speed
-        var emiss = exhaustParticles.emission;
-        emiss.rateOverTime = Mathf.Lerp(3, 20, speed / forwardSpeed);
+        particleEmission.rateOverTime = Mathf.Lerp(5, 20, speed / forwardSpeed);
+        exhaustParticles.startSpeed = Mathf.Lerp(1, 3, speed / forwardSpeed);
+
     }
 
 }
