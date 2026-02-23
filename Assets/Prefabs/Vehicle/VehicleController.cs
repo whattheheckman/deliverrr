@@ -26,6 +26,10 @@ public class VehicleController : MonoBehaviour
     [SerializeField] private float speedReductionMultiplier = 0.5f; // 0.5 = 50% speed
     [SerializeField] private string groundSortingLayerName = "Ground";
 
+    [Header("Effects")]
+    [SerializeField] private ParticleSystem exhaustParticles;
+
+
     private float currentSpeedInterpolation = 0f;
     private bool isBraking = false;
     private bool isOnSlowTilemap = false;
@@ -43,14 +47,12 @@ public class VehicleController : MonoBehaviour
     private float steerDirection = 0f;
     private bool brakePressed = false;
 
-    private ParticleSystem exhaustParticles;
     private Vector3 lastPos = Vector3.zero;
     private Vector3 currentPos = Vector3.zero;
     private float speed = 0f;
 
     void Start()
     {
-        exhaustParticles = GetComponent<ParticleSystem>();
     }
 
     public void setSpeed(float speed)

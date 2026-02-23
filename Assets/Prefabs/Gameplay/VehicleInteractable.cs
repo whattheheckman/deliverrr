@@ -22,7 +22,9 @@ public class Interactable : MonoBehaviour
             Debug.Log("it'd be the player!");
             used = true;
             if (unusedParticles != null) { unusedParticles.Stop(); }
-            if (usedParticles != null) { usedParticles.Play(); }
+            if (usedParticles != null) {
+                 usedParticles.transform.rotation = collision.transform.rotation;
+                usedParticles.Play(); }
             if (spriteRenderer != null) { spriteRenderer.color *= disabledColor; }
 
             var playerMovement = collision.GetComponent<VehicleController>();

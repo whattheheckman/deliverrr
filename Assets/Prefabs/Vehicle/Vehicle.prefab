@@ -681,6 +681,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   brakingDuration: 1.25
+  speedReductionMultiplier: 0.5
+  groundSortingLayerName: Ground
+  exhaustParticles: {fileID: 1601941086854189240}
 --- !u!114 &4903615929769915599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,6 +700,7 @@ MonoBehaviour:
   dropzones: []
   timerText: {fileID: 0}
   packagesLeftText: {fileID: 0}
+  currentTime: 0
 --- !u!114 &-128684987162452505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5534,7 +5538,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5553,8 +5557,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 481128599
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_RenderMode: 0
