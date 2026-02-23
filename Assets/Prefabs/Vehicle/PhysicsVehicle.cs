@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -14,8 +15,8 @@ public class PhysicsVehicle : MonoBehaviour
     [Header("Steering")]
     [SerializeField] private GameObject leftFrontWheel;
     [SerializeField] private GameObject rightFrontWheel;
-    [SerializeField] private AnimationCurve steeringCurve = AnimationCurve.EaseInOut(0,0, 1, 1);
-    [SerializeField] private float maximumSteerAmount = 35f; 
+    [SerializeField] private AnimationCurve steeringCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    [SerializeField] private float maximumSteerAmount = 35f;
     [SerializeField] private float steerSpeed = 2f;
 
     [Header("Braking")]
@@ -26,6 +27,10 @@ public class PhysicsVehicle : MonoBehaviour
     [SerializeField] private float speedReductionMultiplier = 0.5f; // 0.5 = 50% speed
     [SerializeField] private string groundSortingLayerName = "Ground";
 
+    [Header("Effects")]
+    [SerializeField] private ParticleSystem exhaustParticles;
+
+
     private float currentSpeedInterpolation = 0f;
     private bool isBraking = false;
     private bool isOnSlowTilemap = false;
@@ -34,6 +39,7 @@ public class PhysicsVehicle : MonoBehaviour
     private float brakingProgress = 0f;
     private float interpolatedSpeed = 0f;
     private float moveAmount = 0f;
+    private float defaultForwardSpeed = 10f;
 
     private float currentSteerT = 0f; // Track steering ramp up time
     private float currentSteerAngle = 0f; // Actual angle applied
@@ -43,19 +49,46 @@ public class PhysicsVehicle : MonoBehaviour
     private float steerDirection = 0f;
     private bool brakePressed = false;
 
-    private ParticleSystem exhaustParticles;
     private Vector3 lastPos = Vector3.zero;
     private Vector3 currentPos = Vector3.zero;
     private float speed = 0f;
 
+    private EmissionModule particleEmission;
+    private Color32 defaultParticleColor; // get at runtime from particle settings
+    private Color32 slowParticleColor = new Color32(67, 67, 67, 240);
+    private Color32 fastParticleColor = new Color32(255, 215, 0, 255);
     void Start()
     {
-        exhaustParticles = GetComponent<ParticleSystem>();
+        defaultForwardSpeed = forwardSpeed;
+        if (exhaustParticles != null)
+        {
+            particleEmission = exhaustParticles.emission;
+            defaultParticleColor = exhaustParticles.startColor;
+        }
+        else
+        {
+            Debug.Log("particle system not found, make sure to assign to VehicleController in editor!");
+        }
     }
 
     public void setSpeed(float speed)
     {
         forwardSpeed = speed;
+        if (exhaustParticles != null)
+        {
+            if (speed > defaultForwardSpeed)
+            {
+                exhaustParticles.startColor = new Color32(255, 215, 0, 255);
+            }
+            else if (speed < defaultForwardSpeed)
+            {
+                exhaustParticles.startColor = new Color32(67, 67, 67, 240);
+            }
+            else
+            {
+                exhaustParticles.startColor = new Color32(255, 255, 255, 255);
+            }
+        }
     }
 
     public float getSpeed()
@@ -112,7 +145,7 @@ public class PhysicsVehicle : MonoBehaviour
         }
         else if (Keyboard.current.dKey.isPressed)
         {
-            steerDirection =  1f;
+            steerDirection = 1f;
         }
 
         // Check for brake input (s key)
@@ -165,7 +198,7 @@ public class PhysicsVehicle : MonoBehaviour
             // Calculate steering build-up rate based on speed (slower at high speeds)
             // As currentSpeedInterpolation goes 0->1, factor goes 1->0.5 (example)
             float speedFactor = Mathf.Lerp(1f, 0.4f, currentSpeedInterpolation);
-            
+
             if (steerDirection != 0)
             {
                 // Ramp up steering
@@ -189,13 +222,13 @@ public class PhysicsVehicle : MonoBehaviour
             // Visual wheel rotation
             // Assuming Z-axis rotation for top-down 2D, or Y-axis for 3D car. 
             // Original code used Z Euler for collision/transform, let's stick to that for wheels.
-            leftFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, -1f*currentSteerAngle); 
-            rightFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, -1f*currentSteerAngle);
-            
+            leftFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, -1f * currentSteerAngle);
+            rightFrontWheel.transform.localRotation = Quaternion.Euler(0, 0, -1f * currentSteerAngle);
+
             // Apply rotation to vehicle body
             // Rotating the car based on the steering angle and distance moved
             // A simple approximation for turning:
-            transform.Rotate(0, 0, -currentSteerAngle * currentSpeedInterpolation * Time.deltaTime * 2f); 
+            transform.Rotate(0, 0, -currentSteerAngle * currentSpeedInterpolation * Time.deltaTime * 2f);
         }
         else
         {
@@ -213,8 +246,9 @@ public class PhysicsVehicle : MonoBehaviour
 
 
         //TODO: particle system amount based on speed
-        var emiss = exhaustParticles.emission;
-        emiss.rateOverTime = Mathf.Lerp(3, 20, speed / forwardSpeed);
+        particleEmission.rateOverTime = Mathf.Lerp(4.5f, 10f, speed / defaultForwardSpeed);
+        //exhaustParticles.startSpeed = Mathf.Lerp(1f, 2f, speed / defaultForwardSpeed);
+
     }
 
 }

@@ -54,12 +54,16 @@ public class VehicleController : MonoBehaviour
     private float speed = 0f;
 
     private EmissionModule particleEmission;
+    private Color32 defaultParticleColor; // get at runtime from particle settings
+    private Color32 slowParticleColor = new Color32(67, 67, 67, 240);
+    private Color32 fastParticleColor = new Color32(255, 215, 0, 255);
     void Start()
     {
         defaultForwardSpeed = forwardSpeed;
         if (exhaustParticles != null)
         {
             particleEmission = exhaustParticles.emission;
+            defaultParticleColor = exhaustParticles.startColor;
         } else
         {
             Debug.Log("particle system not found, make sure to assign to VehicleController in editor!");
@@ -69,17 +73,21 @@ public class VehicleController : MonoBehaviour
     public void setSpeed(float speed)
     {
         forwardSpeed = speed;
-        if (speed < defaultForwardSpeed)
+        if (exhaustParticles != null)
         {
-            exhaustParticles.startColor = new Color32(255, 215, 0, 255);
-        } else if (speed > defaultForwardSpeed)
-        {
-            exhaustParticles.startColor = new Color32(67, 67, 67, 240);
-        } else
-        {
-            exhaustParticles.startColor = new Color32(255, 255, 255, 255);
+            if (speed > defaultForwardSpeed)
+            {
+                exhaustParticles.startColor = new Color32(255, 215, 0, 255);
+            }
+            else if (speed < defaultForwardSpeed)
+            {
+                exhaustParticles.startColor = new Color32(67, 67, 67, 240);
+            }
+            else
+            {
+                exhaustParticles.startColor = new Color32(255, 255, 255, 255);
+            }
         }
-        
     }
 
     public float getSpeed()
@@ -238,7 +246,7 @@ public class VehicleController : MonoBehaviour
 
         //TODO: particle system amount based on speed
         particleEmission.rateOverTime = Mathf.Lerp(4.5f, 10f, speed / defaultForwardSpeed);
-        exhaustParticles.startSpeed = Mathf.Lerp(1f, 2f, speed / defaultForwardSpeed);
+        //exhaustParticles.startSpeed = Mathf.Lerp(1f, 2f, speed / defaultForwardSpeed);
 
     }
 
