@@ -40,7 +40,7 @@ public class Interactable : MonoBehaviour
     IEnumerator ApplySpeedBoost(VehicleController player)
     {
         float originalSpeed = player.getSpeed();
-        player.setSpeed(originalSpeed *= speedMultiplier);
+        player.setSpeed(originalSpeed * speedMultiplier);
 
         yield return new WaitForSeconds(duration);
 
