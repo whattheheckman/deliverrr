@@ -237,8 +237,8 @@ public class VehicleController : MonoBehaviour
 
 
         //TODO: particle system amount based on speed
-        particleEmission.rateOverTime = Mathf.Lerp(5, 20, speed / forwardSpeed);
-        exhaustParticles.startSpeed = Mathf.Lerp(1, 3, speed / forwardSpeed);
+        particleEmission.rateOverTime = Mathf.Lerp(4.5f, 10f, speed / defaultForwardSpeed);
+        exhaustParticles.startSpeed = Mathf.Lerp(1f, 2f, speed / defaultForwardSpeed);
 
     }
 
