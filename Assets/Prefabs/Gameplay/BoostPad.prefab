@@ -4890,7 +4890,7 @@ MonoBehaviour:
   speedMultiplier: 0.8
   duration: 2
   spriteRenderer: {fileID: 742352740698821828}
-  pickupCollider: {fileID: 0}
+  pickupCollider: {fileID: 6163425718196215092}
 --- !u!212 &742352740698821828
 SpriteRenderer:
   serializedVersion: 2
