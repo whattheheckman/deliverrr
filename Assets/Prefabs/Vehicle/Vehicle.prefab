@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3550be9e2fdd35438fa84c87c8372d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  forwardSpeed: 12
+  forwardSpeed: 11.1
   accelerationCurve:
     serializedVersion: 2
     m_Curve:
@@ -626,7 +626,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  accelerationDuration: 4
+  accelerationDuration: 4.84
   leftFrontWheel: {fileID: 6051684635986876783}
   rightFrontWheel: {fileID: 3974440092952219453}
   steeringCurve:
@@ -635,26 +635,26 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.63736266
-      outSlope: 0.63736266
+      inSlope: 3.1850119
+      outSlope: 3.1850119
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.21666667
+      outWeight: 0.25416666
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 3.1746018
+      outSlope: 3.1746018
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.037500024
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   maximumSteerAmount: 45
-  steerSpeed: 100
+  steerSpeed: 145.6
   brakingCurve:
     serializedVersion: 2
     m_Curve:

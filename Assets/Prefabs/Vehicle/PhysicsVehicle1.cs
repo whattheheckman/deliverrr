@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using static UnityEngine.ParticleSystem;
 
-public class PhysicsVehicle : MonoBehaviour
+public class PhysicsVehicle1 : MonoBehaviour
 {
     [Header("Acceleration")]
     [SerializeField] private float forwardSpeed = 10f;
