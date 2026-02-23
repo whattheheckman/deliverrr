@@ -203,6 +203,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2303018527972296148, guid: 5de00dbf8c9bb3c4a83df61a61e55e5f, type: 3}
   m_PrefabInstance: {fileID: 32295205}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &96126248 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3671192979950645181, guid: 7b3ccf10aa482dc43b27d9d5ee21f243, type: 3}
+  m_PrefabInstance: {fileID: 4040635822986464869}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &160548713 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 78390467449385305, guid: b6d7de697ba3138459279c7d7c76fd48, type: 3}
+  m_PrefabInstance: {fileID: 692071351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &306439119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6447,6 +6457,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1377800652}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &867195727 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 78390467449385305, guid: b6d7de697ba3138459279c7d7c76fd48, type: 3}
+  m_PrefabInstance: {fileID: 1921644096}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &905455184 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2948006251690005406, guid: 24654c48946f2f44e97e8d2d310c58a6, type: 3}
@@ -6458,6 +6473,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &919701841 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3671192979950645181, guid: 7b3ccf10aa482dc43b27d9d5ee21f243, type: 3}
+  m_PrefabInstance: {fileID: 990253673}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &990253673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6523,17 +6543,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2064493442272971464, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
-      propertyPath: maxSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2064493442272971464, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
-      propertyPath: forwardForce
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2064493442272971464, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
-      propertyPath: backwardForce
-      value: 10
+    - target: {fileID: 2674758594243602767, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: m_Mass
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4903615929769915599, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
       propertyPath: timerText
@@ -6543,6 +6555,38 @@ PrefabInstance:
       propertyPath: packagesLeftText
       value: 
       objectReference: {fileID: 1779171742}
+    - target: {fileID: 4903615929769915599, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: packages.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903615929769915599, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: dropzones.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903615929769915599, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: 'packages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1639339683}
+    - target: {fileID: 4903615929769915599, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: 'packages.Array.data[1]'
+      value: 
+      objectReference: {fileID: 160548713}
+    - target: {fileID: 4903615929769915599, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: 'packages.Array.data[2]'
+      value: 
+      objectReference: {fileID: 867195727}
+    - target: {fileID: 4903615929769915599, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: 'dropzones.Array.data[0]'
+      value: 
+      objectReference: {fileID: 96126248}
+    - target: {fileID: 4903615929769915599, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: 'dropzones.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1542879031}
+    - target: {fileID: 4903615929769915599, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: 'dropzones.Array.data[2]'
+      value: 
+      objectReference: {fileID: 919701841}
     - target: {fileID: 6486456990067054683, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
       propertyPath: maxSpeed
       value: 100
@@ -6662,6 +6706,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7813502140206703891, guid: b6d7de697ba3138459279c7d7c76fd48, type: 3}
   m_PrefabInstance: {fileID: 692071351}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1542879031 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3671192979950645181, guid: 7b3ccf10aa482dc43b27d9d5ee21f243, type: 3}
+  m_PrefabInstance: {fileID: 1965775564}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1571838671
 GameObject:
@@ -50844,6 +50893,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1639339683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 78390467449385305, guid: b6d7de697ba3138459279c7d7c76fd48, type: 3}
+  m_PrefabInstance: {fileID: 4677641318736001331}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1700444929 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2303018527972296148, guid: 5de00dbf8c9bb3c4a83df61a61e55e5f, type: 3}

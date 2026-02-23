@@ -5439,10 +5439,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc2c1c0416f5bf45b3a60322a939130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhysicsVehicle1
-  forwardForce: 10
-  backwardForce: 5
-  maxSpeed: 15
-  rotationSpeed: 5
+  forwardForce: 25
+  backwardForce: 15
+  maxSpeed: 20
+  rotationSpeed: 10
   speedReductionMultiplier: 0.5
   groundSortingLayerName: Ground
   exhaustParticles: {fileID: 1011724816286224690}
@@ -5535,7 +5535,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDamping: 1
   m_AngularDamping: 1
   m_GravityScale: 0
