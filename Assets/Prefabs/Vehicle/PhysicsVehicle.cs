@@ -5,7 +5,8 @@ using UnityEngine.Tilemaps;
 using Unity.Cinemachine;
 using static UnityEngine.ParticleSystem;
 
-public class PhysicsVehicle1 : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D))]
+public class PhysicsVehicle : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float forwardForce = 10f;
