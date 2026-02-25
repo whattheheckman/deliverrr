@@ -34,7 +34,7 @@ public class ScreenSpaceIndicator : MonoBehaviour
         }
     }
 
-    public void isEnabled(bool amIenabled)
+    public void IsEnabled(bool amIenabled)
     {
         indicatorUpdates = amIenabled;
         spriteRenderer.enabled = amIenabled;

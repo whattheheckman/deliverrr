@@ -60,7 +60,7 @@ public class PhysicsVehicle : MonoBehaviour
         }
     }
 
-    public void setSpeed(float speed)
+    public void SetSpeed(float speed)
     {
         forwardForce = speed;
         if (exhaustParticles != null)
@@ -80,7 +80,7 @@ public class PhysicsVehicle : MonoBehaviour
         }
     }
 
-    public float getSpeed()
+    public float GetSpeed()
     {
         return forwardForce;
     }
@@ -136,7 +136,7 @@ public class PhysicsVehicle : MonoBehaviour
         {
             Vector3 mousePosition = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0);
             //Debug.Log($"mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()) {mainCamera.ScreenToViewportPoint(mousePosition)}");
-            mousePosition.z = 0f;
+            
 
             Vector2 direction = (mousePosition - (Vector3)mainCamera.WorldToScreenPoint(rb.position));
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;

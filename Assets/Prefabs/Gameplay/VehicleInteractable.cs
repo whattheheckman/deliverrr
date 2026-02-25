@@ -39,12 +39,12 @@ public class Interactable : MonoBehaviour
 
     IEnumerator ApplySpeedBoost(PhysicsVehicle player)
     {
-        float originalSpeed = player.getSpeed();
-        player.setSpeed(originalSpeed * speedMultiplier);
+        float originalSpeed = player.GetSpeed();
+        player.SetSpeed(originalSpeed * speedMultiplier);
 
         yield return new WaitForSeconds(duration);
 
-        player.setSpeed(originalSpeed);
+        player.SetSpeed(originalSpeed);
     }
 
 }
