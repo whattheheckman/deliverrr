@@ -3,13 +3,13 @@ using Unity.Cinemachine;
 
 public class ScreenSpaceIndicator : MonoBehaviour
 {
-    [SerializeField] private float margin = 50f;      // Pixels from the edge
+    [SerializeField] private float margin = 25f;      // Pixels from the edge
     
     [Header("Scale Settings")]
     [SerializeField] private float minDistance = 60f; // Distance where scale is at minScale
     [SerializeField] private float maxDistance = 0f; // Distance where scale is at maxScale
-    [SerializeField] private float minScale = 5f;
-    [SerializeField] private float maxScale = 15f;
+    [SerializeField] private float minScale = 15f;
+    [SerializeField] private float maxScale = 5f;
 
     private SpriteRenderer spriteRenderer;
     private Transform target;

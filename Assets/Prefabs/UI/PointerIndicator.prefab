@@ -45,7 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a195cb83235f7478b9e5d435815843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceIndicator
-  margin: 50
+  margin: 30.4
+  minDistance: 60
+  maxDistance: 0
+  minScale: 5
+  maxScale: 15
 --- !u!1 &8013467529297018030
 GameObject:
   m_ObjectHideFlags: 0
