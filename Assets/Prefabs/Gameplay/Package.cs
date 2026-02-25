@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -8,6 +9,8 @@ public class Package : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Collider2D myCollider;
     private bool isPickupable = true;
+    [SerializeField] private ScreenSpaceIndicator packageIndicatorPrefab;
+    private ScreenSpaceIndicator packageIndicatorReference;
 
     void Start()
     {
@@ -21,6 +24,8 @@ public class Package : MonoBehaviour
         {
             Debug.LogError("missing sprite component for package: " + this.name);
         }
+        packageIndicatorReference = Instantiate(packageIndicatorPrefab);
+        packageIndicatorReference.SetTarget(this.transform);
     
     }
 
@@ -29,6 +34,7 @@ public class Package : MonoBehaviour
         isPickupable = canBePickedUp;
         myCollider.enabled = isPickupable;
         spriteRenderer.enabled = isPickupable;
+        packageIndicatorReference.isEnabled(isPickupable);
     }
 
     public void setPackageID(int incomingId)

@@ -3,7 +3,6 @@ using UnityEngine;
 public class PointerIndicatorController : MonoBehaviour
 {
     [SerializeField] private Sprite indicatorSprite;
-    [SerializeField] private float margin = 50f;
     [SerializeField] private Color spriteColor;
 
     private GameObject indicatorObject;
@@ -35,7 +34,7 @@ public class PointerIndicatorController : MonoBehaviour
         }
 
         // Set sorting layer to ensure visibility
-        spriteRenderer.sortingLayerID = SortingLayer.NameToID("Obstacles");
+        spriteRenderer.sortingLayerID = SortingLayer.NameToID("UI");
 
         // Add and configure the ScreenSpaceIndicator component
         indicator = indicatorObject.AddComponent<ScreenSpaceIndicator>();

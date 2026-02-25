@@ -1,39 +1,49 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ScreenSpaceIndicator : MonoBehaviour
 {
-    [SerializeField] private Sprite indicatorSprite; // The Sprite asset
     [SerializeField] private float margin = 50f;      // Pixels from the edge
-
+    
     private SpriteRenderer spriteRenderer;
     private Transform target;
     private Camera mainCam;
+    private bool indicatorUpdates = true;
 
     void Awake()
     {
         mainCam = Camera.main;
-        
-        // Ensure we have a SpriteRenderer to show the sprite
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null && indicatorSprite != null)
-        {
-            spriteRenderer.sprite = indicatorSprite;
-        }
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
     }
 
     public void SetTarget(Transform newTarget)
     {
-        target = newTarget;
+        if (target != null)
+        {
+            target = newTarget;
+            indicatorUpdates = true;
+        } else
+        {
+            indicatorUpdates = false;
+        }
         // Hide renderer if there is no target
         if (spriteRenderer != null)
         {
-            spriteRenderer.enabled = (target != null);
+            spriteRenderer.enabled = indicatorUpdates;
         }
+    }
+
+    public void isEnabled(bool amIenabled)
+    {
+        indicatorUpdates = amIenabled;
     }
 
     void Update()
     {
-        if (target == null) return;
+        if (!indicatorUpdates) return;
 
         // 1. Get screen position
         Vector3 screenPos = mainCam.WorldToScreenPoint(target.position);
@@ -62,7 +72,7 @@ public class ScreenSpaceIndicator : MonoBehaviour
 
         // 4. Convert screen position back to World Position for the Sprite
         // We set Z to 10 (or any distance) so it's visible in front of the camera
-        Vector3 worldPos = mainCam.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 10f));
+        Vector3 worldPos = mainCam.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, -1f));
         transform.position = worldPos;
     }
 

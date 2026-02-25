@@ -124,7 +124,8 @@ public class PhysicsVehicle : MonoBehaviour
         if (mainCamera != null && Mouse.current != null && rb != null)
         {
             Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            Debug.DrawLine(rb.position, mousePosition, Color.red);
+            mousePosition.z = 0f;
+            Debug.DrawLine(rb.position, mousePosition, Color.red,1f,false);
         }
     }
 
@@ -146,15 +147,15 @@ public class PhysicsVehicle : MonoBehaviour
             //Debug.Log($"Rotating to: {targetAngle}, moving towards: {newAngle}, Current: {rb.rotation}");
         }
 
-        // Apply forward force when W is pressed
-        if (Keyboard.current != null && Keyboard.current.wKey.isPressed)
+        // Apply forward force when left mouse is pressed
+        if (Keyboard.current != null && Mouse.current.leftButton.isPressed)
         {
             float effectiveForce = isOnSlowTilemap ? forwardForce * speedReductionMultiplier : forwardForce;
             rb.AddForce(transform.up * effectiveForce);
         }
 
-        // Apply backward force when S is pressed
-        if (Keyboard.current != null && Keyboard.current.sKey.isPressed)
+        // Apply backward force when space is pressed
+        if (Keyboard.current != null && Keyboard.current.spaceKey.isPressed)
         {
             float effectiveForce = isOnSlowTilemap ? backwardForce * speedReductionMultiplier : backwardForce;
             rb.AddForce(-transform.up * effectiveForce);
