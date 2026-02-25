@@ -124,8 +124,8 @@ public class PhysicsVehicle : MonoBehaviour
         if (mainCamera != null && Mouse.current != null && rb != null)
         {
             Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            mousePosition.z = 0f;
-            Debug.DrawLine(rb.position, mousePosition, Color.red,1f,false);
+            mousePosition.z = 0.5f;
+            Debug.DrawLine(rb.position, mousePosition, Color.grey,1f,false);
         }
     }
 
@@ -155,7 +155,7 @@ public class PhysicsVehicle : MonoBehaviour
         }
 
         // Apply backward force when space is pressed
-        if (Keyboard.current != null && Keyboard.current.spaceKey.isPressed)
+        if (Keyboard.current != null && (Keyboard.current.spaceKey.isPressed || Mouse.current.rightButton.isPressed))
         {
             float effectiveForce = isOnSlowTilemap ? backwardForce * speedReductionMultiplier : backwardForce;
             rb.AddForce(-transform.up * effectiveForce);

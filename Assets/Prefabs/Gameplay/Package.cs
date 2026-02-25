@@ -36,7 +36,7 @@ public class Package : MonoBehaviour
         myCollider.enabled = isPickupable;
         spriteRenderer.enabled = isPickupable;
         packageIndicatorReference.SetTarget(this.gameObject.transform);
-        packageIndicatorReference.IsEnabled(isPickupable);
+        packageIndicatorReference.isEnabled(isPickupable);
     }
 
     public void setPackageID(int incomingId)

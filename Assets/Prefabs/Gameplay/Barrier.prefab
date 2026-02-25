@@ -4886,7 +4886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   unusedParticles: {fileID: 5425593850567659257}
   usedParticles: {fileID: 8976431166573252560}
-  disabledColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 0.2627451}
+  disabledColor: {r: 0.34509805, g: 0.34509805, b: 0.34509805, a: 0.2627451}
   speedMultiplier: 0.8
   duration: 2
   spriteRenderer: {fileID: 742352740698821828}

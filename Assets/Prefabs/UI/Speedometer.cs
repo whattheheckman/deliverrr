@@ -21,7 +21,7 @@ public class Speedometer : MonoBehaviour
     private Vector3 target_currentPos = Vector3.zero;
 
    
-    private void Update()
+    private void FixedUpdate()
     {
         target_lastPos = target_currentPos;
         target_currentPos = GameObject_target.transform.position;

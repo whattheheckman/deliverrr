@@ -5,6 +5,12 @@ public class ScreenSpaceIndicator : MonoBehaviour
 {
     [SerializeField] private float margin = 50f;      // Pixels from the edge
     
+    [Header("Scale Settings")]
+    [SerializeField] private float minDistance = 60f; // Distance where scale is at minScale
+    [SerializeField] private float maxDistance = 0f; // Distance where scale is at maxScale
+    [SerializeField] private float minScale = 5f;
+    [SerializeField] private float maxScale = 15f;
+
     private SpriteRenderer spriteRenderer;
     private Transform target;
     private Camera mainCamera;
@@ -14,12 +20,11 @@ public class ScreenSpaceIndicator : MonoBehaviour
     {
         mainCamera = CinemachineBrain.GetActiveBrain(0).OutputCamera;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
     }
 
     public void SetTarget(Transform newTarget)
     {
-        if (target != null)
+        if (newTarget != null)
         {
             target = newTarget;
             indicatorUpdates = true;
@@ -34,18 +39,18 @@ public class ScreenSpaceIndicator : MonoBehaviour
         }
     }
 
-    public void IsEnabled(bool amIenabled)
+    public void isEnabled(bool amIenabled)
     {
         indicatorUpdates = amIenabled;
         spriteRenderer.enabled = amIenabled;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (!indicatorUpdates) return;
+        if (!indicatorUpdates || target == null) return;
 
-        // 1. Get screen position
-        Vector3 screenPos = mainCamera.gameObject.transform.position;
+        // 1. Get screen position of the target
+        Vector3 screenPos = mainCamera.WorldToScreenPoint(target.position);
 
         // 2. Check if target is off-screen or behind camera
         bool isOffScreen = screenPos.z < 0 ||
@@ -71,8 +76,24 @@ public class ScreenSpaceIndicator : MonoBehaviour
 
         // 4. Convert screen position back to World Position for the Sprite
         // We set Z to 10 (or any distance) so it's visible in front of the camera
-        Vector3 worldPos = mainCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, -1f));
+        Vector3 worldPos = mainCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 10f));
         transform.position = worldPos;
+
+        // 5. Adjust scale based on distance
+        if (spriteRenderer != null)
+        {
+            // Using Vector2.Distance to ignore Z-axis depth differences in 2D
+            float distance = Vector2.Distance(mainCamera.transform.position, target.position);
+            
+            // Get a 0 to 1 value based on where the distance falls between minDistance and maxDistance
+            float normalizedDistance = Mathf.InverseLerp(minDistance, maxDistance, distance);
+            
+            // Calculate the final scale
+            float currentScale = Mathf.Lerp(minScale, maxScale, normalizedDistance);
+            
+            // Apply the scale
+            spriteRenderer.transform.localScale = new Vector3(currentScale, currentScale, 1f);
+        }
     }
 
     private void RotateArrow(Vector3 indicatorPos)
