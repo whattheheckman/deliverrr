@@ -1,7 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using Unity.Cinemachine;
 
 public class ScreenSpaceIndicator : MonoBehaviour
 {
@@ -9,12 +7,12 @@ public class ScreenSpaceIndicator : MonoBehaviour
     
     private SpriteRenderer spriteRenderer;
     private Transform target;
-    private Camera mainCam;
+    private Camera mainCamera;
     private bool indicatorUpdates = true;
 
     void Awake()
     {
-        mainCam = Camera.main;
+        mainCamera = CinemachineBrain.GetActiveBrain(0).OutputCamera;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
     }
@@ -39,6 +37,7 @@ public class ScreenSpaceIndicator : MonoBehaviour
     public void isEnabled(bool amIenabled)
     {
         indicatorUpdates = amIenabled;
+        spriteRenderer.enabled = amIenabled;
     }
 
     void Update()
@@ -46,7 +45,7 @@ public class ScreenSpaceIndicator : MonoBehaviour
         if (!indicatorUpdates) return;
 
         // 1. Get screen position
-        Vector3 screenPos = mainCam.WorldToScreenPoint(target.position);
+        Vector3 screenPos = mainCamera.gameObject.transform.position;
 
         // 2. Check if target is off-screen or behind camera
         bool isOffScreen = screenPos.z < 0 ||
@@ -72,7 +71,7 @@ public class ScreenSpaceIndicator : MonoBehaviour
 
         // 4. Convert screen position back to World Position for the Sprite
         // We set Z to 10 (or any distance) so it's visible in front of the camera
-        Vector3 worldPos = mainCam.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, -1f));
+        Vector3 worldPos = mainCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, -1f));
         transform.position = worldPos;
     }
 
