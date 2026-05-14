@@ -530,6 +530,8 @@ GameObject:
   - component: {fileID: 547970421}
   - component: {fileID: 547970419}
   - component: {fileID: 547970420}
+  - component: {fileID: 547970422}
+  - component: {fileID: 547970424}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -646,6 +648,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1238252008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!19719996 &547970422
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547970418}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
+--- !u!50 &547970424
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547970418}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1514,14 +1581,19 @@ MonoBehaviour:
   confineBounds: {fileID: 1190716516}
   packagePrefab: {fileID: 78390467449385305, guid: b6d7de697ba3138459279c7d7c76fd48, type: 3}
   dropzonePrefab: {fileID: 3671192979950645181, guid: 7b3ccf10aa482dc43b27d9d5ee21f243, type: 3}
+  boostPadPrefab: {fileID: 3175620109623319659, guid: 914f537b059b35345ad26103af9cf9d8, type: 3}
+  barrierPrefab: {fileID: 3175620109623319659, guid: 5de00dbf8c9bb3c4a83df61a61e55e5f, type: 3}
+  boostPadCount: 3
+  barrierCount: 3
   packageManager: {fileID: 2048099935}
-  gridWidth: 5
-  gridHeight: 5
+  gridWidth: 8
+  gridHeight: 8
   blockSize: 6
   roadWidth: 3
   extraEdgeProbability: 0.3
-  boundsTileThickness: 3
-  grassBorderSize: 10
+  boundsTileThickness: 1
+  grassBorderSize: 20
+  confinerPadding: 3
 --- !u!4 &1966197051
 Transform:
   m_ObjectHideFlags: 0
@@ -1684,7 +1756,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5854849842307496495, guid: 24654c48946f2f44e97e8d2d310c58a6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -9.899994
+      value: -9.899963
       objectReference: {fileID: 0}
     - target: {fileID: 6808972091685988671, guid: 24654c48946f2f44e97e8d2d310c58a6, type: 3}
       propertyPath: m_Name
@@ -1714,6 +1786,10 @@ PrefabInstance:
       propertyPath: GameObject_target
       value: 
       objectReference: {fileID: 2048099926}
+    - target: {fileID: 9032152157702038929, guid: 24654c48946f2f44e97e8d2d310c58a6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 12.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4455860564054052003, guid: 24654c48946f2f44e97e8d2d310c58a6, type: 3}

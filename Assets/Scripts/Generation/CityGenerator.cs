@@ -23,6 +23,12 @@ public class CityGenerator : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject packagePrefab;
     [SerializeField] private GameObject dropzonePrefab;
+    [SerializeField] private GameObject boostPadPrefab;
+    [SerializeField] private GameObject barrierPrefab;
+
+    [Header("Obstacle Counts")]
+    [SerializeField] private int boostPadCount = 3;
+    [SerializeField] private int barrierCount  = 3;
 
     [Header("References")]
     [SerializeField] private PackageManager packageManager;
@@ -35,6 +41,7 @@ public class CityGenerator : MonoBehaviour
     [SerializeField] private float extraEdgeProbability = 0.30f;
     [SerializeField] private int boundsTileThickness = 3;
     [SerializeField] private int grassBorderSize = 10;
+    [SerializeField] private int confinerPadding = 2;
 
     // edgeH[gx, gy] = road corridor connecting (gx,gy) and (gx+1,gy)
     private bool[,] edgeH;
@@ -49,6 +56,7 @@ public class CityGenerator : MonoBehaviour
         GenerateGraph();
         PaintTilemaps();
         SpawnPickups();
+        SpawnObstacles();
     }
 
     // -------------------------------------------------------------------------
@@ -258,14 +266,21 @@ public class CityGenerator : MonoBehaviour
     {
         if (cameraConfiner == null || confineBounds == null) return;
 
-        // Use the inner map edge (tile cell corners) as the confine rectangle
-        Vector2 bl = roadTilemap.CellToWorld(new Vector3Int(0,    0,    0));
-        Vector2 br = roadTilemap.CellToWorld(new Vector3Int(mapW, 0,    0));
-        Vector2 tr = roadTilemap.CellToWorld(new Vector3Int(mapW, mapH, 0));
-        Vector2 tl = roadTilemap.CellToWorld(new Vector3Int(0,    mapH, 0));
+        // Extend the confine region beyond the fence by confinerPadding tiles
+        int ext = boundsTileThickness + confinerPadding;
+
+        // CellToWorld gives world-space corners; convert to the collider's local space
+        // because PolygonCollider2D.SetPath always expects local-space coordinates.
+        Transform t = confineBounds.transform;
+        Vector2 bl = t.InverseTransformPoint(roadTilemap.CellToWorld(new Vector3Int(-ext,      -ext,      0)));
+        Vector2 br = t.InverseTransformPoint(roadTilemap.CellToWorld(new Vector3Int(mapW + ext, -ext,      0)));
+        Vector2 tr = t.InverseTransformPoint(roadTilemap.CellToWorld(new Vector3Int(mapW + ext, mapH + ext, 0)));
+        Vector2 tl = t.InverseTransformPoint(roadTilemap.CellToWorld(new Vector3Int(-ext,       mapH + ext, 0)));
 
         confineBounds.SetPath(0, new Vector2[] { bl, br, tr, tl });
         cameraConfiner.BoundingShape2D = confineBounds;
+        // Disable confiner damping so it doesn't fight the position composer's own damping
+        cameraConfiner.Damping = 0f;
         cameraConfiner.InvalidateBoundingShapeCache();
     }
 
@@ -314,6 +329,48 @@ public class CityGenerator : MonoBehaviour
         }
 
         packageManager.InitPackages(packageGOs.ToArray(), dropzoneGOs.ToArray());
+    }
+
+    // -------------------------------------------------------------------------
+    // Obstacle spawning
+    // -------------------------------------------------------------------------
+
+    void SpawnObstacles()
+    {
+        int stride = blockSize + roadWidth;
+
+        // Collect the world-space centre of every active road corridor.
+        // Corridors are guaranteed to be on drivable road and spread across the map.
+        var midpoints = new List<Vector3>();
+
+        for (int gx = 0; gx < gridWidth - 1; gx++)
+            for (int gy = 0; gy < gridHeight; gy++)
+                if (edgeH[gx, gy])
+                {
+                    int midX = gx * stride + roadWidth + blockSize / 2;
+                    int midY = gy * stride + roadWidth / 2;
+                    midpoints.Add(roadTilemap.GetCellCenterWorld(new Vector3Int(midX, midY, 0)));
+                }
+
+        for (int gx = 0; gx < gridWidth; gx++)
+            for (int gy = 0; gy < gridHeight - 1; gy++)
+                if (edgeV[gx, gy])
+                {
+                    int midX = gx * stride + roadWidth / 2;
+                    int midY = gy * stride + roadWidth + blockSize / 2;
+                    midpoints.Add(roadTilemap.GetCellCenterWorld(new Vector3Int(midX, midY, 0)));
+                }
+
+        Shuffle(midpoints);
+
+        int idx = 0;
+        for (int i = 0; i < boostPadCount && idx < midpoints.Count; i++, idx++)
+            if (boostPadPrefab != null)
+                Instantiate(boostPadPrefab, midpoints[idx], Quaternion.identity);
+
+        for (int i = 0; i < barrierCount && idx < midpoints.Count; i++, idx++)
+            if (barrierPrefab != null)
+                Instantiate(barrierPrefab, midpoints[idx], Quaternion.identity);
     }
 
     Vector3 NodeToWorld(Vector2Int node, int stride)
