@@ -569,6 +569,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1377800652}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &905455184 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2948006251690005406, guid: 24654c48946f2f44e97e8d2d310c58a6, type: 3}
+  m_PrefabInstance: {fileID: 7915970766339624164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &1022057698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -577,10 +588,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -128684987162452505, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
-      propertyPath: packageManager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 743634079504504120, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
       propertyPath: m_Name
       value: LHeadlight
@@ -588,26 +595,6 @@ PrefabInstance:
     - target: {fileID: 1601941086854189240, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
       propertyPath: looping
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2064493442272971464, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
-      propertyPath: forwardForce
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2064493442272971464, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
-      propertyPath: backwardForce
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2064493442272971464, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
-      propertyPath: rotationSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2674758594243602767, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
-      propertyPath: m_LinearDamping
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2674758594243602767, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
-      propertyPath: m_AngularDamping
-      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 3348617808125618821, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
       propertyPath: m_FalloffIntensity
@@ -657,6 +644,14 @@ PrefabInstance:
       propertyPath: m_ApplyToSortingLayers.Array.size
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4903615929769915599, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 905455184}
+    - target: {fileID: 4903615929769915599, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
+      propertyPath: packagesLeftText
+      value: 
+      objectReference: {fileID: 1779171742}
     - target: {fileID: 6486456990067054683, guid: 703bb54ef0aeb0d4aaff700ed5e26f67, type: 3}
       propertyPath: maxSpeed
       value: 100
@@ -845,6 +840,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1079073790821414194, guid: 24654c48946f2f44e97e8d2d310c58a6, type: 3}
   m_PrefabInstance: {fileID: 7915970766339624164}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1779171742 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 733726164520961895, guid: 24654c48946f2f44e97e8d2d310c58a6, type: 3}
+  m_PrefabInstance: {fileID: 7915970766339624164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1940419744
 GameObject:
   m_ObjectHideFlags: 0
