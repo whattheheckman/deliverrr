@@ -11,6 +11,7 @@ public class Package : MonoBehaviour
     private Collider2D myCollider;
     private bool isPickupable = true;
     [SerializeField] private ScreenSpaceIndicator packageIndicatorPrefab;
+    [SerializeField] private Color indicatorColor = Color.white;
     private ScreenSpaceIndicator packageIndicatorReference;
 
     void Awake()
@@ -27,6 +28,14 @@ public class Package : MonoBehaviour
     {
         packageIndicatorReference = Instantiate(packageIndicatorPrefab);
         packageIndicatorReference.SetTarget(this.gameObject.transform);
+        packageIndicatorReference.SetColor(indicatorColor);
+    }
+
+    public void SetIndicatorColor(Color color)
+    {
+        indicatorColor = color;
+        if (packageIndicatorReference != null)
+            packageIndicatorReference.SetColor(color);
     }
 
     public bool packageCanBePickedUp() {return isPickupable;}

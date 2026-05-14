@@ -12,6 +12,9 @@ public class PackageManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI packagesLeftText;
+    [Header("Indicator Colors")]
+    [SerializeField] private Color packageIndicatorColor = Color.yellow;
+    [SerializeField] private Color dropzoneIndicatorColor = Color.cyan;
 
 
 
@@ -40,8 +43,10 @@ public class PackageManager : MonoBehaviour
         
             dropzones[i].GetComponent<Package>().setPackageCanBePickedUp(false);
             dropzones[i].GetComponent<Package>().setPackageID(i);
+            dropzones[i].GetComponent<Package>().SetIndicatorColor(dropzoneIndicatorColor);
             packages[i].GetComponent<Package>().setPackageCanBePickedUp(true);
             packages[i].GetComponent<Package>().setPackageID(i);
+            packages[i].GetComponent<Package>().SetIndicatorColor(packageIndicatorColor);
         }
         currentTime = 0f;
         timerText.text = "00:00.00";

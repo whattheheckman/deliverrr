@@ -3,7 +3,9 @@
     "allow": [
       "Bash(grep:*)",
       "Bash(find C:UsersnabsaDocumentsSchoolCollegeClassesCS4700deliverrr/Assets -name *.unity -path */Scenes/* -o -name *.unity -path */*/Scenes/*)",
-      "Bash(find /c/Users/nabsa/Documents/School/College/Classes/CS4700/deliverrr -name ProjectSettings.asset -o -name *.asmdef)"
+      "Bash(find /c/Users/nabsa/Documents/School/College/Classes/CS4700/deliverrr -name ProjectSettings.asset -o -name *.asmdef)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\nabsa\\\\Documents\\\\School\\\\College\\\\Classes\\\\CS4700\\\\deliverrr\\\\Assets\" -Recurse -Filter \"*.cs\")",
+      "Bash(Select-Object -ExpandProperty FullName)"
     ]
   }
 }

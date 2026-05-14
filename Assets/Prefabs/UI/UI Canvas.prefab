@@ -27,15 +27,15 @@ RectTransform:
   m_GameObject: {fileID: 176529562831170068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.49, y: 0.49, z: 0.49}
+  m_LocalScale: {x: 0.93, y: 0.93, z: 0.93}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1079073790821414194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.372, y: 0.80745935}
   m_AnchorMax: {x: 0.67548907, y: 1}
-  m_AnchoredPosition: {x: -9.5, y: 0.9300003}
-  m_SizeDelta: {x: 79, y: 7}
+  m_AnchoredPosition: {x: 56.974915, y: 0.9300003}
+  m_SizeDelta: {x: 231.8159, y: 7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1192198606561393375
 CanvasRenderer:
@@ -164,14 +164,14 @@ RectTransform:
   m_GameObject: {fileID: 3182220181047811479}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1079073790821414194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.16100001}
   m_AnchorMax: {x: 0.300511, y: 0.34040686}
-  m_AnchoredPosition: {x: 12.500008, y: -9.900009}
+  m_AnchoredPosition: {x: 70.34599, y: -1.4715004}
   m_SizeDelta: {x: 140.69199, y: 2.9429932}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2816953299539650249
@@ -303,14 +303,14 @@ RectTransform:
   m_GameObject: {fileID: 3834278554951099833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.54, y: 0.54, z: 0.54}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1079073790821414194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.300511, y: 0.094000004}
-  m_AnchoredPosition: {x: 12.5, y: -0.7000122}
+  m_AnchoredPosition: {x: 58.4, y: 0}
   m_SizeDelta: {x: 140.69199, y: 21.942993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8135890258223133020

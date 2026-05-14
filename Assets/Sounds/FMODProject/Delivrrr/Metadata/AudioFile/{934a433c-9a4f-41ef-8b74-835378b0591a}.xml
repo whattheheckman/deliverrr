@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{934a433c-9a4f-41ef-8b74-835378b0591a}">
+		<property name="assetPath">
+			<value>853612__oldome__vegetation-grass-moss-foliage-handling-rustling-bushes-light_footsteps.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>35.026520833333336</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{6944e3fd-7f36-49d1-9e3f-fded137992e8}</destination>
+		</relationship>
+	</object>
+</objects>

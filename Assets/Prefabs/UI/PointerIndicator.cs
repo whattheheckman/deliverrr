@@ -45,6 +45,12 @@ public class ScreenSpaceIndicator : MonoBehaviour
         spriteRenderer.enabled = amIenabled;
     }
 
+    public void SetColor(Color color)
+    {
+        if (spriteRenderer != null)
+            spriteRenderer.color = color;
+    }
+
     void FixedUpdate()
     {
         if (!indicatorUpdates || target == null) return;
