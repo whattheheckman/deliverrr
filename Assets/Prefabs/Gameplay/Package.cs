@@ -13,21 +13,20 @@ public class Package : MonoBehaviour
     [SerializeField] private ScreenSpaceIndicator packageIndicatorPrefab;
     private ScreenSpaceIndicator packageIndicatorReference;
 
-    void Start()
+    void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         myCollider = GetComponent<Collider2D>();
         if (myCollider == null)
-        {
             Debug.LogError("missing collider component for package: " + this.name);
-        }
         if (spriteRenderer == null)
-        {
             Debug.LogError("missing sprite component for package: " + this.name);
-        }
+    }
+
+    void Start()
+    {
         packageIndicatorReference = Instantiate(packageIndicatorPrefab);
         packageIndicatorReference.SetTarget(this.gameObject.transform);
-    
     }
 
     public bool packageCanBePickedUp() {return isPickupable;}
@@ -35,8 +34,11 @@ public class Package : MonoBehaviour
         isPickupable = canBePickedUp;
         myCollider.enabled = isPickupable;
         spriteRenderer.enabled = isPickupable;
-        packageIndicatorReference.SetTarget(this.gameObject.transform);
-        packageIndicatorReference.isEnabled(isPickupable);
+        if (packageIndicatorReference != null)
+        {
+            packageIndicatorReference.SetTarget(this.gameObject.transform);
+            packageIndicatorReference.isEnabled(isPickupable);
+        }
     }
 
     public void setPackageID(int incomingId)

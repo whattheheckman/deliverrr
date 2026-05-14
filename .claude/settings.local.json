@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep:*)",
+      "Bash(find C:UsersnabsaDocumentsSchoolCollegeClassesCS4700deliverrr/Assets -name *.unity -path */Scenes/* -o -name *.unity -path */*/Scenes/*)",
+      "Bash(find /c/Users/nabsa/Documents/School/College/Classes/CS4700/deliverrr -name ProjectSettings.asset -o -name *.asmdef)"
+    ]
+  }
+}

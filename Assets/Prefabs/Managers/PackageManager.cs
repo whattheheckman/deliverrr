@@ -18,6 +18,16 @@ public class PackageManager : MonoBehaviour
     private float currentTime;
     private int packagesRemainingCount = 0;
 
+    /// <summary>
+    /// Called by CityGenerator.Awake() to supply runtime-generated packages and dropzones.
+    /// Must be called before PackageManager.Start() runs.
+    /// </summary>
+    public void InitPackages(GameObject[] pkgs, GameObject[] zones)
+    {
+        packages  = pkgs;
+        dropzones = zones;
+    }
+
     void Start()
     {
         if (dropzones.Count() != packages.Count())
