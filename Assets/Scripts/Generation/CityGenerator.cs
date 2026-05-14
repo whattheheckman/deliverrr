@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,10 +8,17 @@ public class CityGenerator : MonoBehaviour
     [Header("Tilemaps")]
     [SerializeField] private Tilemap roadTilemap;
     [SerializeField] private Tilemap groundTilemap;
+    [SerializeField] private Tilemap boundsTilemap;
 
     [Header("Tiles")]
     [SerializeField] private TileBase roadTile;
     [SerializeField] private TileBase sidewalkTile;
+    [SerializeField] private TileBase grassTile;
+    [SerializeField] private TileBase boundsTile;
+
+    [Header("Camera Confiner")]
+    [SerializeField] private CinemachineConfiner2D cameraConfiner;
+    [SerializeField] private PolygonCollider2D confineBounds;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject packagePrefab;
@@ -25,6 +33,8 @@ public class CityGenerator : MonoBehaviour
     [SerializeField] private int blockSize  = 6;
     [SerializeField] private int roadWidth  = 3;
     [SerializeField] private float extraEdgeProbability = 0.30f;
+    [SerializeField] private int boundsTileThickness = 3;
+    [SerializeField] private int grassBorderSize = 10;
 
     // edgeH[gx, gy] = road corridor connecting (gx,gy) and (gx+1,gy)
     private bool[,] edgeH;
@@ -208,6 +218,55 @@ public class CityGenerator : MonoBehaviour
 
         foreach (var pos in sidewalkPos)
             groundTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), sidewalkTile);
+
+        int mapW = gridWidth  * stride;
+        int mapH = gridHeight * stride;
+
+        // Fill interior grass (map area minus road/sidewalk)
+        if (grassTile != null)
+        {
+            for (int x = 0; x < mapW; x++)
+                for (int y = 0; y < mapH; y++)
+                {
+                    var pos = new Vector2Int(x, y);
+                    if (!roadPos.Contains(pos) && !sidewalkPos.Contains(pos))
+                        groundTilemap.SetTile(new Vector3Int(x, y, 0), grassTile);
+                }
+
+            // Extended grass border outside the map
+            int ext = grassBorderSize + boundsTileThickness;
+            for (int x = -ext; x < mapW + ext; x++)
+                for (int y = -ext; y < mapH + ext; y++)
+                    if (x < 0 || x >= mapW || y < 0 || y >= mapH)
+                        groundTilemap.SetTile(new Vector3Int(x, y, 0), grassTile);
+        }
+
+        // Paint solid fence boundsTileThickness tiles thick outside the map
+        if (boundsTilemap != null && boundsTile != null)
+        {
+            boundsTilemap.ClearAllTiles();
+            for (int x = -boundsTileThickness; x < mapW + boundsTileThickness; x++)
+                for (int y = -boundsTileThickness; y < mapH + boundsTileThickness; y++)
+                    if (x < 0 || x >= mapW || y < 0 || y >= mapH)
+                        boundsTilemap.SetTile(new Vector3Int(x, y, 0), boundsTile);
+        }
+
+        SetupCameraConfiner(mapW, mapH);
+    }
+
+    void SetupCameraConfiner(int mapW, int mapH)
+    {
+        if (cameraConfiner == null || confineBounds == null) return;
+
+        // Use the inner map edge (tile cell corners) as the confine rectangle
+        Vector2 bl = roadTilemap.CellToWorld(new Vector3Int(0,    0,    0));
+        Vector2 br = roadTilemap.CellToWorld(new Vector3Int(mapW, 0,    0));
+        Vector2 tr = roadTilemap.CellToWorld(new Vector3Int(mapW, mapH, 0));
+        Vector2 tl = roadTilemap.CellToWorld(new Vector3Int(0,    mapH, 0));
+
+        confineBounds.SetPath(0, new Vector2[] { bl, br, tr, tl });
+        cameraConfiner.BoundingShape2D = confineBounds;
+        cameraConfiner.InvalidateBoundingShapeCache();
     }
 
     // -------------------------------------------------------------------------
