@@ -5526,7 +5526,7 @@ MonoBehaviour:
   backwardForce: 20
   maxSpeed: 20
   rotationSpeed: 15
-  speedReductionMultiplier: 0.5
+  speedReductionMultiplier: 0.83
   groundSortingLayerName: Ground
   exhaustParticles: {fileID: 1011724816286224690}
 --- !u!114 &4903615929769915599
@@ -5545,6 +5545,8 @@ MonoBehaviour:
   dropzones: []
   timerText: {fileID: 0}
   packagesLeftText: {fileID: 0}
+  packageIndicatorColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  dropzoneIndicatorColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &-128684987162452505
 MonoBehaviour:
   m_ObjectHideFlags: 0
